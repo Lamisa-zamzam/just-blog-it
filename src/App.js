@@ -4,11 +4,13 @@ import Navbar from "./Components/Navbar/Navbar";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./Components/Header/Header";
 import Blogs from "./Components/Blogs/Blogs";
-import AddService from "./Components/Dashboard/AddService/AddService";
-
+import ManageBlogs from "./Components/Dashboard/ManageServices/ManageServices";
+import PublishBlog from "./Components/Dashboard/PublishBlog/PublishBlog";
+import MakeAdmin from "./Components/Dashboard/MakeAdmin/MakeAdmin";
 import Footer from "./Components/Footer/Footer";
 import ResponsiveNav from "./Components/responsiveNav/ResponsiveNav";
 import SideNav from "./Components/Dashboard/SideNav/SideNav";
+import Bookings from "./Components/Dashboard/Bookings/Bookings";
 
 function App() {
     // Initial value of if the dropdown is open
@@ -44,8 +46,17 @@ function App() {
                     <Blogs />
                     <Footer />
                 </Route>
-                <Route path="/writeBlog">
-                    <AddService />
+                <Route path="/publishBlog">
+                    <PublishBlog />
+                </Route>
+                <Route path="/makeAdmin">
+                    <MakeAdmin />
+                </Route>
+                <Route path="/bookings">
+                    <Bookings />
+                </Route>
+                <Route path="/manageBlogs">
+                    <ManageBlogs />
                 </Route>
                 <Route path="/side">
                     <SideNav />

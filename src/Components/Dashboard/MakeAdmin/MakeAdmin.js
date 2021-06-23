@@ -1,59 +1,86 @@
-// import React from "react";
-// import Sidebar from "../../Shared/Sidebar/Sidebar";
-// import { Button, Form } from "react-bootstrap";
-// import { useForm } from "react-hook-form";
+import React from "react";
+import SideNav from "../SideNav/SideNav";
+import { useForm } from "react-hook-form";
 
-// const MakeAdmin = () => {
-//     const {
-//         register,
-//         handleSubmit,
-//         formState: { errors },
-//     } = useForm();
+const MakeAdmin = () => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
 
-//     const onSubmit = (data) => {
-//         const { email } = data;
-//         const admin = { email };
+    const onSubmit = (data) => {
+        fetch("http://localhost:5000/makeAdmin", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(data),
+        })
+            .then((res) => res.json())
+            .then((result) => {
+                if (result) {
+                    alert("Admin added successfully!!");
+                    window.location.reload();
+                }
+            });
+    };
 
-//         fetch("https://morning-shelf-52119.herokuapp.com/makeAdmin", {
-//             method: "POST",
-//             headers: { "content-type": "application/json" },
-//             body: JSON.stringify(admin),
-//         })
-//             .then((res) => res.json())
-//             .then((result) => {
-//                 if (result) {
-//                     alert("Admin added successfully!!");
-//                     window.location.reload();
-//                 }
-//             });
-//     };
+    return (
+        <div className="relative min-h-screen md:flex">
+            <SideNav />
+            <div className="flex-1 p-10">
+                <h1 className="text-center text-4xl font-semibold mt-10">
+                    Make an Admin
+                </h1>
+                <form
+                    className="max-w-xl m-auto py-10 mt-10 px-12 border"
+                    onSubmit={handleSubmit(onSubmit)}
+                >
+                    <label className="text-gray-600 font-medium">
+                        Email address of the admin you want to make
+                    </label>
+                    <input
+                        className="border-solid border-gray-300 border py-2 px-4 w-full rounded text-gray-700"
+                        type="email"
+                        name="adminEmail"
+                        placeholder="your.admin@example.com"
+                        autoFocus
+                        {...register("adminEmail", { required: true })}
+                    />
+                    {errors.adminEmail && (
+                        <div className="mb-3 text-normal text-red-500">
+                            This field is required
+                        </div>
+                    )}
+                    <br />
+                    <br />
+                    <label className="text-gray-600 font-medium">
+                        Password
+                    </label>
+                    <input
+                        className="border-solid border-gray-300 border py-2 px-4 w-full rounded text-gray-700"
+                        type="password"
+                        name="adminPassword"
+                        placeholder="super secured password"
+                        autoFocus
+                        {...register("adminPassword", { required: true })}
+                    />
+                    {errors.adminPassword && (
+                        <div className="mb-3 text-normal text-red-500">
+                            This field is required
+                        </div>
+                    )}
+                    <div className="px-4 py-3 text-right sm:px-6">
+                        <button
+                            className="mt-4 w-36 bg-blue-500 hover:bg-blue-700 text-white border py-3 px-6 font-semibold text-md rounded"
+                            type="submit"
+                        >
+                            Add
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+};
 
-//     return (
-//         <div className="dashboardContainer" style={{ height: "100vh" }}>
-//             <Sidebar />
-//             <div className="dashboardFormContainer">
-//                 <h3 className="dashboardTitle">Make an Admin</h3>
-//                 <br />
-//                 <Form onSubmit={handleSubmit(onSubmit)}>
-//                     <Form.Group>
-//                         <Form.Label>Enter Email Address</Form.Label>
-//                         <Form.Control
-//                             type="email"
-//                             placeholder="e.g. johndoe@gmail.com"
-//                             {...register("email", { required: true })}
-//                         />
-//                         {errors.email && (
-//                             <span className="error">Email is required</span>
-//                         )}
-//                     </Form.Group>
-//                     <br />
-//                     <Button className="brandBtn" type="submit">
-//                         Add Admin
-//                     </Button>
-//                 </Form>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default MakeAdmin;
+export default MakeAdmin;

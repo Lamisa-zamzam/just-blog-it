@@ -3,7 +3,7 @@ import SideNav from "../SideNav/SideNav";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
-const AddService = () => {
+const PublishBlog = () => {
     const [imageURL, setImageURL] = useState(null);
     const [error, setError] = useState(null);
     const {
@@ -12,18 +12,17 @@ const AddService = () => {
         formState: { errors },
     } = useForm();
     const onSubmit = (data) => {
-        const { detail, price, serviceName } = data;
-        const service = { detail, price, serviceName, imageURL };
-
-        fetch("https://morning-shelf-52119.herokuapp.com/addService", {
+        fetch("http://localhost:5000/addBlog", {
             method: "POST",
             headers: { "content-type": "application/json" },
-            body: JSON.stringify(service),
+            body: JSON.stringify({ ...data, imageURL }),
         })
             .then((res) => res.json())
             .then((result) => {
                 if (result) {
-                    alert("Your service has been added successfully!!");
+                    alert(
+                        "Your blog has been published successfully!! Give yourself a pat on the back!! 👊"
+                    );
                     window.location.reload();
                 }
             });
@@ -62,14 +61,15 @@ const AddService = () => {
                     </label>
                     <input
                         className="border-solid border-gray-300 border py-2 px-4 w-full rounded text-gray-700"
+                        type="text"
                         name="title"
-                        placeholder="Full Stack Developer, Backend Engineer, etc."
+                        placeholder="Your Blog Title"
                         autoFocus
                         {...register("title", { required: true })}
                     />
                     {errors.title && (
                         <div className="mb-3 text-normal text-red-500">
-                            {errors.title.message}
+                            This field is required
                         </div>
                     )}
 
@@ -78,6 +78,7 @@ const AddService = () => {
                     </label>
                     <textarea
                         className="border-solid border-gray-300 border py-20 px-4 w-full rounded text-gray-700"
+                        placeholder="Your content goes here..."
                         name="content"
                         rows={5}
                         cols={5}
@@ -85,7 +86,7 @@ const AddService = () => {
                     />
                     {errors.content && (
                         <div className="mb-3 text-normal text-red-500 ">
-                            {errors.content.message}
+                           This field is required
                         </div>
                     )}
 
@@ -120,7 +121,7 @@ const AddService = () => {
                                             name="file-upload"
                                             type="file"
                                             className="sr-only"
-                                            onClick={handleImageUpload}
+                                            onChange={handleImageUpload}
                                         />
                                     </label>
                                     <p className="pl-1">or drag and drop</p>
@@ -158,4 +159,4 @@ const AddService = () => {
     );
 };
 
-export default AddService;
+export default PublishBlog;

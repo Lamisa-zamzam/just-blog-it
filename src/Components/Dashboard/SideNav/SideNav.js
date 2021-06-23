@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 const SideNav = () => {
     const [isOpen, setIsOpen] = useState(true);
-    console.log(isOpen);
     return (
         <>
             {/* mobile menu */}
@@ -59,13 +58,19 @@ const SideNav = () => {
                         className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
                         to="/"
                     >
+                        Your Blogs
+                    </Link>
+                    <Link
+                        className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
+                        to="/"
+                    >
                         Dashboard
                     </Link>
                     <Link
                         className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
                         to="/"
                     >
-                        Read Blog
+                        Make an admin
                     </Link>
                 </nav>
             </div>

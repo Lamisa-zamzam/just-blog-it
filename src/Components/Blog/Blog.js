@@ -1,26 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Blog = ({ player }) => {
+const Blog = ({ blog }) => {
+    console.log(blog);
     return (
         <div>
             <div
                 className="md:mx-5 md:ml-20 grid md:grid-cols-2 justify-center items-center bg-white"
-                key={player.id}
+                // key={blog._id}
             >
                 <img
-                    src={player.img}
+                    src={blog.imageURL}
                     alt="player"
                     className="w-100 object-contain rounded mb-20 shadow-lg"
                 />
                 <div className="px-5">
                     <h2 className="text-2xl mb-2 font-black text-red-700">
-                        {player.name}
+                        {blog.title}
                     </h2>
-                    <p className="mb-2 font-semibold">
-                        {player.country}, {player.club}, {player.position}, #
-                        {player.jerseyNumber}
-                    </p>
+                    <p className="mb-2 font-semibold">{blog.content}</p>
                     <br />
                     <Link
                         to="/"
