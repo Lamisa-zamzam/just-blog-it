@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import SideNav from "../SideNav/SideNav";
 
 const ManageBlogs = () => {
-    const [blogs, setblogs] = useState([]);
+    const [blogs, setBlogs] = useState([]);
 
     useEffect(() => {
         fetch("http://localhost:5000/blogs")
             .then((res) => res.json())
             .then((result) => {
-                setblogs(result);
+                setBlogs(result);
             });
     }, []);
 
