@@ -13,15 +13,12 @@ const ManageBlogs = () => {
     }, []);
 
     const handleServiceDelete = (_id) => {
-        fetch(
-            `https://morning-shelf-52119.herokuapp.com/deleteService/${_id}`,
-            {
-                method: "DELETE",
-            }
-        )
+        fetch(`http://localhost:5000/deleteBlog/${_id}`, {
+            method: "DELETE",
+        })
             .then((res) => res.json())
-            .then((data) => {
-                if (data) {
+            .then((deleteCount) => {
+                if (deleteCount) {
                     alert("Your service has been deleted.");
                     window.location.reload();
                 } else {
@@ -53,48 +50,61 @@ const ManageBlogs = () => {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
-                            {blogs.map((blog) => (
-                                <tr key={blog._id}>
-                                    <td className="px-6 py-4">
-                                        <div className="flex items-center space-x-3">
-                                            <div className="inline-flex w-10 h-10">
-                                                {" "}
-                                                <img
-                                                    className="w-10 h-10 object-cover rounded-full"
-                                                    alt="User avatar"
-                                                    src={blog.imageURL}
-                                                />{" "}
+                            {blogs[0] ? (
+                                blogs.map((blog) => (
+                                    <tr key={blog._id}>
+                                        <td className="px-6 py-4">
+                                            <div className="flex items-center space-x-3">
+                                                <div className="inline-flex w-10 h-10">
+                                                    {" "}
+                                                    <img
+                                                        className="w-10 h-10 object-cover rounded-full"
+                                                        alt="User avatar"
+                                                        src={blog.imageURL}
+                                                    />{" "}
+                                                </div>
+                                                <div>
+                                                    <p> {blog.title} </p>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <p> {blog.title} </p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td className="px-6 py-4 overflow-hidden">
-                                        <p className="text-gray-500 text-sm font-semibold tracking-wide">
-                                            {blog.content}
-                                        </p>
-                                    </td>
-                                    <td className="px-6 py-4 text-center">
-                                        <button className="focus:outline-none">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                className="h-6 w-6"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="red"
+                                        </td>
+                                        <td className="px-6 py-4 overflow-hidden">
+                                            <p className="text-gray-500 text-sm font-semibold tracking-wide">
+                                                {blog.content}
+                                            </p>
+                                        </td>
+                                        <td className="px-6 py-4 text-center">
+                                            <button
+                                                className="focus:outline-none"
+                                                onClick={() =>
+                                                    handleServiceDelete(
+                                                        blog._id
+                                                    )
+                                                }
                                             >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth={2}
-                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                                                />
-                                            </svg>
-                                        </button>
-                                    </td>
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    className="h-6 w-6"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke="red"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth={2}
+                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                                                    />
+                                                </svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr className="text-3xl text-center text-gray-500 text-sm font-semibold tracking-wide">
+                                    <td>No Blogs posted Yet!!!</td>
                                 </tr>
-                            ))}
+                            )}
                         </tbody>
                     </table>
                 </div>

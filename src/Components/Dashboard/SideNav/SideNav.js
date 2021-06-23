@@ -44,31 +44,31 @@ const SideNav = () => {
                     {" "}
                     <Link
                         className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
-                        to="/"
+                        to="/home"
                     >
                         Home
                     </Link>
                     <Link
                         className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
-                        to="/"
+                        to="/publishBlog"
                     >
                         Write a Blog
                     </Link>
                     <Link
                         className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
-                        to="/"
+                        to="/blogs"
                     >
                         Your Blogs
                     </Link>
                     <Link
                         className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
-                        to="/"
+                        to="/dashboard"
                     >
                         Dashboard
                     </Link>
                     <Link
                         className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
-                        to="/"
+                        to="/makeAdmin"
                     >
                         Make an admin
                     </Link>
