@@ -22,6 +22,11 @@ const SideNav = () => {
             {/* mobile menu */}
             <div className="bg-blue-400 text-gray-100 font-bold flex justify-between md:hidden">
                 <Link to="/" className="block p-4">
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvrImfqN1gybiuS92IZ5iKRiPIYyj7cmJVrQ&usqp=CAU"
+                        alt="Just Blog It"
+                        className="w-10 inline mr-5 rounded-full"
+                    />
                     Just Blog It
                 </Link>
                 <button
@@ -50,15 +55,22 @@ const SideNav = () => {
                     isOpen ? "-translate-x-full" : ""
                 } bg-blue-300 text-white absolute transform w-64 py-7 inset-y-0 left-0 md:relative md:translate-x-0 transition duration-200 ease-in-out`}
             >
-                {/* sidebar */}
-                {/* <a href="/home">logo</a> */}
-                <span className="text-4xl font-extrabold">Just Blog It</span>
-
+                {/* sidebar */}{" "}
+                <Link to="/" className="block p-4">
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvrImfqN1gybiuS92IZ5iKRiPIYyj7cmJVrQ&usqp=CAU"
+                        alt="Just Blog It"
+                        className="w-10 inline mr-2 mb-2 rounded-full"
+                    />
+                    <span className="text-3xl font-extrabold">
+                        Just Blog It
+                    </span>
+                </Link>
                 <nav className="mt-5">
                     {" "}
                     <Link
-                        className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
                         to="/home"
+                        className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
                     >
                         Home
                     </Link>

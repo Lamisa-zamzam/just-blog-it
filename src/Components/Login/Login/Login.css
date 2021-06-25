@@ -7,7 +7,6 @@
 
 .form-field {
     border: none;
-    background-color: rgb(190, 255, 190);
     border-radius: 2px;
     margin-top: 20px;
     width: 50%;
@@ -23,9 +22,7 @@
 }
 
 .submit-button {
-    font-size: 20px;
     color: white;
-    background-color: green;
     border-radius: 5px;
     border: none;
     box-shadow: 2px 2px 5px gray;

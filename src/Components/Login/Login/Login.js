@@ -189,20 +189,21 @@ const Login = () => {
         <div className="md:m-28">
             <form onSubmit={handleSubmit(onSubmit)} className="form-card">
                 <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD4qERDnuFM9cBrqRQdDv-fVwKcHHIQQ3lDQ&usqp=CAU"
-                    alt="Globetrotter"
-                    className="logo"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvrImfqN1gybiuS92IZ5iKRiPIYyj7cmJVrQ&usqp=CAU"
+                    alt="Just Blog It"
+                    className="m-auto w-16 inline"
                 />
-                <h3 style={{ display: "inline", marginLeft: "20px" }}>
+                <h3 className="inline ml-5 text-3xl font-black">
                     {user.isNewUser ? "Create an account" : "Log In"}
                 </h3>
+                <br />
                 <br />
                 {user.isNewUser && (
                     <input
                         type="text"
                         name="name"
                         {...register("name", { required: true })}
-                        className="form-field"
+                        className="bg-blue-100 form-field"
                         placeholder="Your Name"
                     />
                 )}
@@ -215,7 +216,7 @@ const Login = () => {
                         required: true,
                         pattern: /\S+@\S+\.\S+/,
                     })}
-                    className="form-field"
+                    className="bg-blue-100 form-field"
                     placeholder="Your Email"
                 />
                 <br />
@@ -236,7 +237,7 @@ const Login = () => {
                         pattern: /\d{1}/,
                     })}
                     placeholder="Your Password"
-                    className="form-field"
+                    className="bg-blue-100 form-field"
                     id="password"
                     onBlur={handleBlur}
                 />
@@ -262,7 +263,7 @@ const Login = () => {
                             pattern: /\d{1}/,
                         })}
                         placeholder="Confirm Your Password"
-                        className="form-field"
+                        className="bg-blue-100 form-field"
                         id="confirmPassword"
                         onBlur={handleBlur}
                     />
@@ -307,7 +308,7 @@ const Login = () => {
                     <input
                         type="submit"
                         value="Create"
-                        className="submit-button"
+                        className="bg-blue-500 text-xl focus:outline-none focus:bg-blue-700 submit-button"
                     />
                 ) : (
                     <input
@@ -319,22 +320,23 @@ const Login = () => {
                 <br />
                 <p>
                     {user.isNewUser ? "Already" : "Don't"} have an account?{" "}
-                    <a
+                    <Link
                         href="/"
-                        style={{ textDecoration: "underline" }}
+                        className="underline text-blue-500"
                         onClick={(e) => toggleForm(e)}
                     >
                         {user.isNewUser ? "Login" : "Create An Account"}
-                    </a>
+                    </Link>
                 </p>
             </form>
-            <div className="social-login">
+            <div className="social-login text-xl">
+            <br />
                 <h4>or</h4>
-                <h4>continue with</h4>
+                <h2>continue with</h2>
                 <br />
                 <button
                     onClick={handleGoogleLogin}
-                    className="social-media-btn"
+                    className="focus:outline-none focus:bg-blue-100 social-media-btn"
                 >
                     {" "}
                     <FontAwesomeIcon
@@ -346,7 +348,7 @@ const Login = () => {
                 </button>
                 <br />
                 <br />
-                <button className="social-media-btn">
+                <button className="focus:outline-none focus:bg-blue-100 social-media-btn">
                     <FontAwesomeIcon
                         icon={faFacebookSquare}
                         className="social-media-icon"
@@ -357,7 +359,7 @@ const Login = () => {
                 </button>
                 <br />
                 <br />
-                <button className="social-media-btn">
+                <button className="focus:outline-none focus:bg-blue-100 social-media-btn">
                     <FontAwesomeIcon
                         icon={faTwitterSquare}
                         className="social-media-icon"

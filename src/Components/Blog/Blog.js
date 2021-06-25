@@ -18,7 +18,7 @@ const Blog = ({ blog }) => {
                         {blog.content}
                     </p>
                     <br />
-                    <button className="shadow-lg mt-5 py-3 px-7 bg-blue-300 rounded-full hover:bg-blue-500 transition duration-300 ease-in-out flex items-center w-max">
+                    <button className="shadow-lg mt-5 py-3 px-7 bg-blue-300 rounded-full focus:outline-none focus:bg-blue-500 transition duration-300 ease-in-out flex items-center w-max">
                         Continue Reading
                         <svg
                             className="w-6 h-6 ml-4"
