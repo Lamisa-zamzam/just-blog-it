@@ -13,10 +13,10 @@ const Players = () => {
     }, []);
     return (
         <>
-            <h1 className="lg:text-6xl md-text-7xl sm:text-5xl text-3xl font-black md:mx-20 md:mb-16 uppercase">
+            <h1 className="lg:text-6xl md-text-7xl sm:text-5xl text-3xl font-black md:mx-20 mb-16 uppercase">
                 Hot Blogs
             </h1>
-            <div className="grid md:grid-cols-2 justify-center items-center bg-white">
+            <div className="grid lg:grid-cols-2 grid-cols-1 justify-center items-center bg-white">
                 {blogs.map((blog) => (
                     <Blog key={blog._id} blog={blog} />
                 ))}

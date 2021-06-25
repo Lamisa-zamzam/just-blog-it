@@ -1,0 +1,19 @@
+.container-div {
+    text-align: center;
+    margin-top: 150px;
+}
+
+.container-div h1 {
+    font-size: 90px;
+    color: rgb(66, 177, 247);
+    margin-bottom: 60px;
+}
+
+.container-div p {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+Link {
+    font-size: 20px !important;
+}

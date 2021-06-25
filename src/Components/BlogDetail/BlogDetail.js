@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
+import ResponsiveNav from "../responsiveNav/ResponsiveNav";
 
 const BlogDetail = () => {
     const { id } = useParams();
@@ -12,10 +13,35 @@ const BlogDetail = () => {
             .then((res) => res.json())
             .then((data) => setBlog(data[0]));
     }, [id]);
+
+    // Initial value of if the dropdown is open
+    const [isOpen, setIsOpen] = useState(false);
+    // toggle the dropdown
+    const toggle = () => {
+        setIsOpen(!isOpen);
+    };
+
+    // If the device width is greater than 760, set the state to false
+    useEffect(() => {
+        const hideMenu = () => {
+            if (window.innerWidth > 760 && isOpen) {
+                setIsOpen(false);
+            }
+        };
+
+        // on resize, hide the menu
+        window.addEventListener("resize", hideMenu);
+
+        return () => {
+            window.removeEventListener("resize", hideMenu);
+        };
+    }, [isOpen]);
+
     return (
         <>
-            <Navbar />
-            <div className="md:mx-10 md:my-20 justify-center items-center bg-white">
+            <Navbar toggle={toggle} />
+            <ResponsiveNav toggle={toggle} isOpen={isOpen} />
+            <div className="md:mx-10 my-20 justify-center items-center bg-white">
                 <img
                     src={blog.imageURL}
                     alt="player"

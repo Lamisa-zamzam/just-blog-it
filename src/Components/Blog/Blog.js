@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Blog = ({ blog }) => {
     return (
         <Link to={`/blog/${blog._id}`}>
-            <div className="md:mx-10 md:my-20 grid md:grid-cols-2 justify-center items-center bg-white">
+            <div className="md:mx-10 md:my-20 mb-20 grid md:grid-cols-2 justify-center items-center bg-white">
                 <img
                     src={blog.imageURL}
                     alt="player"

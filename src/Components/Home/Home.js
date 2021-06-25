@@ -16,10 +16,11 @@ const Home = () => {
     // If the device width is greater than 760, set the state to false
     useEffect(() => {
         const hideMenu = () => {
-            if (window.innerWidth > 760 && isOpen) {
+            if (window.innerWidth > 1024 && isOpen) {
                 setIsOpen(false);
             }
         };
+        console.log(window.innerWidth)
 
         // on resize, hide the menu
         window.addEventListener("resize", hideMenu);
@@ -29,13 +30,15 @@ const Home = () => {
         };
     }, [isOpen]);
     return (
-        <div>
+        <>
             <Navbar toggle={toggle} />
             <ResponsiveNav toggle={toggle} isOpen={isOpen} />
-            <Header />
-            <Blogs />
+            <div className="m-5">
+                <Header />
+                <Blogs />
+            </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

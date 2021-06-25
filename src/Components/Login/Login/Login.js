@@ -3,7 +3,9 @@ import { UserContext } from "../../../App";
 import { useHistory, useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import "./Login.css";
+
+import Navbar from "../../Navbar/Navbar";
+import ResponsiveNav from "../../responsiveNav/ResponsiveNav";
 
 //firebase
 import firebase from "firebase/app";
@@ -150,7 +152,11 @@ const Login = () => {
     };
 
     // React hook form
-    const { register, handleSubmit, errors } = useForm();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
 
     const onSubmit = (data) => {
         data.name
@@ -185,191 +191,223 @@ const Login = () => {
         return password === confirmPassword;
     };
 
+    // Initial value of if the dropdown is open
+    const [isOpen, setIsOpen] = useState(false);
+    // toggle the dropdown
+    const toggle = () => {
+        setIsOpen(!isOpen);
+    };
+
+    // If the device width is greater than 760, set the state to false
+    useEffect(() => {
+        const hideMenu = () => {
+            if (window.innerWidth > 760 && isOpen) {
+                setIsOpen(false);
+            }
+        };
+
+        // on resize, hide the menu
+        window.addEventListener("resize", hideMenu);
+
+        return () => {
+            window.removeEventListener("resize", hideMenu);
+        };
+    }, [isOpen]);
+
     return (
-        <div className="md:m-28">
-            <form onSubmit={handleSubmit(onSubmit)} className="form-card">
-                <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvrImfqN1gybiuS92IZ5iKRiPIYyj7cmJVrQ&usqp=CAU"
-                    alt="Just Blog It"
-                    className="m-auto w-16 inline"
-                />
-                <h3 className="inline ml-5 text-3xl font-black">
-                    {user.isNewUser ? "Create an account" : "Log In"}
-                </h3>
-                <br />
-                <br />
-                {user.isNewUser && (
-                    <input
-                        type="text"
-                        name="name"
-                        {...register("name", { required: true })}
-                        className="bg-blue-100 form-field"
-                        placeholder="Your Name"
+        <>
+            <Navbar toggle={toggle} />
+            <ResponsiveNav toggle={toggle} isOpen={isOpen} />
+            <div className="my-28 md:mx-28 text-center">
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvrImfqN1gybiuS92IZ5iKRiPIYyj7cmJVrQ&usqp=CAU"
+                        alt="Just Blog It"
+                        className="m-auto w-16 inline"
                     />
-                )}
-                <br />
-                <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    {...register("email", {
-                        required: true,
-                        pattern: /\S+@\S+\.\S+/,
-                    })}
-                    className="bg-blue-100 form-field"
-                    placeholder="Your Email"
-                />
-                <br />
-                {errors && (
-                    <span className="error">
-                        {errors.email.type === "required"
-                            ? "Email is required"
-                            : "Your Email pattern is not correct"}
-                    </span>
-                )}
-                <br />
-                <input
-                    type="password"
-                    name="password"
-                    {...register("password", {
-                        required: true,
-                        minLength: 8,
-                        pattern: /\d{1}/,
-                    })}
-                    placeholder="Your Password"
-                    className="bg-blue-100 form-field"
-                    id="password"
-                    onBlur={handleBlur}
-                />
-                <br />
-                {errors && (
-                    <span className="error">
-                        {errors.password.type === "required" &&
-                            "Password is required"}
-                        {errors.password.type === "pattern" &&
-                            "Your password must contain one or more numbers"}
-                        {errors.password.type === "minLength" &&
-                            "Your Password must contain at least 8 characters"}
-                    </span>
-                )}
-                <br />
-                {user.isNewUser && (
+                    <h3 className="inline ml-5 text-3xl font-black">
+                        {user.isNewUser ? "Create an account" : "Log In"}
+                    </h3>
+                    <br />
+                    <br />
+                    {user.isNewUser && (
+                        <input
+                            type="text"
+                            name="name"
+                            {...register("name", { required: true })}
+                            className="bg-blue-100 border-0 rounded-sm mt-5 md:w-1/2 h-10 p-5 sm:w-full"
+                            placeholder="Your Name"
+                        />
+                    )}
+                    <br />
+                    {errors.name && (
+                        <span className="error">
+                            Name is {errors.name.type}
+                        </span>
+                    )}
+                    <br />
+                    <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        {...register("email", {
+                            required: true,
+                            pattern: /\S+@\S+\.\S+/,
+                        })}
+                        className="bg-blue-100 border-0 rounded-sm mt-5 md:w-1/2 h-10 p-5 sm:w-full"
+                        placeholder="Your Email"
+                    />
+                    <br />
+                    {errors.email && (
+                        <span className="error">
+                            {errors.email.type === "required"
+                                ? "Email is required"
+                                : "Email must be valid"}
+                        </span>
+                    )}
+                    <br />
                     <input
                         type="password"
-                        name="confirmPassword"
-                        {...register("confirmPassword", {
+                        name="password"
+                        {...register("password", {
                             required: true,
                             minLength: 8,
                             pattern: /\d{1}/,
                         })}
-                        placeholder="Confirm Your Password"
-                        className="bg-blue-100 form-field"
-                        id="confirmPassword"
+                        placeholder="Your Password"
+                        className="bg-blue-100 border-0 rounded-sm mt-5 md:w-1/2 h-10 p-5 sm:w-full"
+                        id="password"
                         onBlur={handleBlur}
                     />
-                )}
-                <br />
-                {errors && (
-                    <span className="error">
-                        {errors.confirmPassword.type === "required" &&
-                            "Password is required"}
-                        {errors.confirmPassword.type === "pattern" &&
-                            "Your password must contain one or more numbers"}
-                        {errors.confirmPassword.type === "minLength" &&
-                            "Your Password must contain at least 8 characters"}
-                    </span>
-                )}
-                <br />
-                <br />
-                {!user.isNewUser && (
-                    <div className="savingPassword">
+                    <br />
+                    {errors.password && (
+                        <span className="error">
+                            {errors.password.type === "required"
+                                ? "Password is required"
+                                : errors.password.type === "pattern"
+                                ? "Your password must contain one or more numbers"
+                                : errors.password.type === "minLength" &&
+                                  "Your Password must contain at least 8 characters"}
+                        </span>
+                    )}
+                    <br />
+                    {user.isNewUser && (
                         <input
-                            type="checkbox"
-                            name="save-password"
-                            id="save-password"
+                            type="password"
+                            name="confirmPassword"
+                            {...register("confirmPassword", {
+                                required: true,
+                                minLength: 8,
+                                pattern: /\d{1}/,
+                            })}
+                            placeholder="Confirm Your Password"
+                            className="bg-blue-100 border-0 rounded-sm mt-5 md:w-1/2 h-10 p-5 sm:w-full"
+                            id="confirmPassword"
+                            onBlur={handleBlur}
                         />
-                        <label
-                            htmlFor="save-password"
-                            style={{ marginRight: "50px" }}
-                        >
-                            &nbsp;Remember Me
-                        </label>
+                    )}
+                    <br />
+                    {errors.confirmPassword && (
+                        <span className="error">
+                            {errors.confirmPassword.type === "required"
+                                ? "Password is required"
+                                : errors.confirmPassword.type === "pattern"
+                                ? "Your password must contain one or more numbers"
+                                : errors.confirmPassword.type === "minLength" &&
+                                  "Your Password must contain at least 8 characters"}
+                        </span>
+                    )}
+                    <br />
+                    {!user.isNewUser && (
+                        <>
+                            <input
+                                type="checkbox"
+                                name="save-password"
+                                id="save-password"
+                            />
+                            <label
+                                htmlFor="save-password"
+                                style={{ marginRight: "50px" }}
+                            >
+                                &nbsp;Remember Me
+                            </label>
+                            <Link
+                                to="/login"
+                                className="underline text-blue-500"
+                            >
+                                Forgot Password
+                            </Link>
+                            <br />
+                            <br />
+                        </>
+                    )}
+                    <br />
+                    <p className="error">{user.error}</p>
+                    {user.isNewUser ? (
+                        <input
+                            type="submit"
+                            value="Create"
+                            className="bg-blue-500 text-xl focus:outline-none focus:bg-blue-700 text-white border-0 rounded-sm mb-5 md:w-1/2 px-20 h-10"
+                        />
+                    ) : (
+                        <input
+                            type="submit"
+                            value="Log In"
+                            className="bg-blue-500 text-xl focus:outline-none focus:bg-blue-700 text-white border-0 rounded-sm mb-5 w-1/2 h-10"
+                        />
+                    )}
+                    <br />
+                    <p>
+                        {user.isNewUser ? "Already" : "Don't"} have an account?{" "}
                         <Link
-                            to="/login"
-                            style={{ textDecoration: "underline" }}
+                            href="/"
+                            className="underline text-blue-500"
+                            onClick={(e) => toggleForm(e)}
                         >
-                            Forgot Password
+                            {user.isNewUser ? "Login" : "Create An Account"}
                         </Link>
-                    </div>
-                )}
-                <br />
-                <p className="error">{user.error}</p>
-                {user.isNewUser ? (
-                    <input
-                        type="submit"
-                        value="Create"
-                        className="bg-blue-500 text-xl focus:outline-none focus:bg-blue-700 submit-button"
-                    />
-                ) : (
-                    <input
-                        type="submit"
-                        value="Log In"
-                        className="submit-button"
-                    />
-                )}
-                <br />
-                <p>
-                    {user.isNewUser ? "Already" : "Don't"} have an account?{" "}
-                    <Link
-                        href="/"
-                        className="underline text-blue-500"
-                        onClick={(e) => toggleForm(e)}
+                    </p>
+                </form>
+                <div className="mb-5 text-xl">
+                    <br />
+                    <h4>or</h4>
+                    <h2>continue with</h2>
+                    <br />
+                    <button
+                        onClick={handleGoogleLogin}
+                        className="focus:outline-none focus:bg-blue-100 p-3 text-2xl px-12 rounded-full border-2 border-blue-700 shadow-lg"
                     >
-                        {user.isNewUser ? "Login" : "Create An Account"}
-                    </Link>
-                </p>
-            </form>
-            <div className="social-login text-xl">
-            <br />
-                <h4>or</h4>
-                <h2>continue with</h2>
-                <br />
-                <button
-                    onClick={handleGoogleLogin}
-                    className="focus:outline-none focus:bg-blue-100 social-media-btn"
-                >
-                    {" "}
-                    <FontAwesomeIcon
-                        icon={faGoogle}
-                        style={{ color: "blue", marginRight: "-3px" }}
-                        size="2x"
-                    />{" "}
-                    oogle
-                </button>
-                <br />
-                <br />
-                <button className="focus:outline-none focus:bg-blue-100 social-media-btn">
-                    <FontAwesomeIcon
-                        icon={faFacebookSquare}
-                        className="social-media-icon"
-                        style={{ color: "royalBlue" }}
-                        size="2x"
-                    />{" "}
-                    Facebook
-                </button>
-                <br />
-                <br />
-                <button className="focus:outline-none focus:bg-blue-100 social-media-btn">
-                    <FontAwesomeIcon
-                        icon={faTwitterSquare}
-                        className="social-media-icon"
-                        style={{ color: "deepSkyBlue" }}
-                        size="2x"
-                    />{" "}
-                    Twitter
-                </button>
+                        {" "}
+                        <FontAwesomeIcon
+                            icon={faGoogle}
+                            className="text-blue-700"
+                            size="2x"
+                        />{" "}
+                        oogle
+                    </button>
+                    <br />
+                    <br />
+                    <button className="focus:outline-none focus:bg-blue-100 p-3 text-2xl px-12 rounded-full border-2 border-blue-700 shadow-lg">
+                        <FontAwesomeIcon
+                            icon={faFacebookSquare}
+                            className="text-blue-600"
+                            size="2x"
+                        />{" "}
+                        Facebook
+                    </button>
+                    <br />
+                    <br />
+                    <button className="focus:outline-none focus:bg-blue-100 p-3 text-2xl px-12 rounded-full border-2 border-blue-700 shadow-lg">
+                        <FontAwesomeIcon
+                            icon={faTwitterSquare}
+                            style={{ color: "deepskyblue" }}
+                            size="2x"
+                        />{" "}
+                        Twitter
+                    </button>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
