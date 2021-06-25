@@ -28,16 +28,16 @@ const Navbar = ({ toggle }) => {
                 </svg>
             </div>
             <div className="pr-8 md:block hidden">
-                <Link className="p-4" to="/">
+                <Link className="p-4" to="/home">
                     Home
                 </Link>
-                <Link className="p-4" to="/">
+                <Link className="p-4" to="/publishBlog">
                     Write a Blog
                 </Link>
-                <Link className="p-4" to="/">
+                <Link className="p-4" to="/dashboard">
                     Dashboard
                 </Link>
-                <Link className="p-4" to="/">
+                <Link className="p-4" to="/readBlog">
                     Read Blog
                 </Link>
             </div>

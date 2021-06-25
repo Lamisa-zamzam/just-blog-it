@@ -1,8 +1,22 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const SideNav = () => {
     const [isOpen, setIsOpen] = useState(true);
+    const loggedInEmail = sessionStorage.getItem("email");
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/checkIfAdmin?email=${loggedInEmail}`)
+            .then((res) => res.json())
+            .then((data) => {
+                if (data[0]) {
+                    console.log(data, "data");
+                    setIsAdmin(true);
+                }
+            });
+    }, [loggedInEmail]);
+
     return (
         <>
             {/* mobile menu */}
@@ -48,30 +62,29 @@ const SideNav = () => {
                     >
                         Home
                     </Link>
-                    <Link
-                        className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
-                        to="/publishBlog"
-                    >
-                        Write a Blog
-                    </Link>
-                    <Link
-                        className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
-                        to="/blogs"
-                    >
-                        Your Blogs
-                    </Link>
-                    <Link
-                        className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
-                        to="/dashboard"
-                    >
-                        Dashboard
-                    </Link>
-                    <Link
-                        className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
-                        to="/makeAdmin"
-                    >
-                        Make an admin
-                    </Link>
+                    {isAdmin && (
+                        <>
+                            {" "}
+                            <Link
+                                className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
+                                to="/publishBlog"
+                            >
+                                Write a Blog
+                            </Link>
+                            <Link
+                                className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
+                                to="/manageBlogs"
+                            >
+                                Manage Blogs
+                            </Link>
+                            <Link
+                                className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
+                                to="/makeAdmin"
+                            >
+                                Make an admin
+                            </Link>
+                        </>
+                    )}
                 </nav>
             </div>
         </>

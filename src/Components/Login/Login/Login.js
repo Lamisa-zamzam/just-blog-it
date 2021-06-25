@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../App";
 import { useHistory, useLocation } from "react-router";
 import { Link } from "react-router-dom";
@@ -31,6 +31,28 @@ const Login = () => {
     let location = useLocation();
     let { from } = location.state || { from: { pathname: "/dashboard" } };
 
+    useEffect(() => {
+        const token = sessionStorage.getItem("token");
+        if (token) history.push(from);
+    }, [from, history]);
+
+    const checkAdmin = (email, password) => {
+        fetch(`http://localhost:5000/checkAdmin`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data[0]) {
+                    sessionStorage.setItem("admin", true);
+                    return;
+                }
+
+                sessionStorage.setItem("admin", false);
+            });
+    };
+
     // Google sign in
     const handleGoogleLogin = () => {
         firebase
@@ -40,9 +62,7 @@ const Login = () => {
                 const googleUser = result.user;
                 const { displayName, email, photoURL } = googleUser;
                 handleUser(displayName, email, photoURL, true);
-                sessionStorage.setItem("email", email);
-                sessionStorage.setItem("name", displayName);
-                sessionStorage.setItem("photo", photoURL);
+
                 handleAuthToken();
             })
             .catch((error) => {
@@ -67,17 +87,21 @@ const Login = () => {
         const newUser = { ...user };
         if (name !== undefined) {
             newUser.name = name;
+            sessionStorage.setItem("name", name);
         }
         if (email !== undefined) {
             newUser.email = email;
+            sessionStorage.setItem("email", email);
         }
         if (photoURL !== undefined) {
             newUser.photoURL = photoURL;
+            sessionStorage.setItem("photo", photoURL);
         }
         if (whetherLoggedIn !== undefined) {
             newUser.isLoggedIn = true;
         }
         setUser(newUser);
+        checkAdmin(email, password);
     };
 
     // handles error in case it occurs
@@ -98,6 +122,7 @@ const Login = () => {
                 .then((userCredential) => {
                     const { email } = userCredential.user;
                     handleUser(name, email, undefined, true);
+                    handleAuthToken();
                 })
                 .catch((error) => {
                     handleErrorMessage(error);
@@ -117,6 +142,7 @@ const Login = () => {
             .then((userCredential) => {
                 const { email } = userCredential.user;
                 handleUser(undefined, email, undefined, true);
+                handleAuthToken();
             })
             .catch((error) => {
                 handleErrorMessage(error);
@@ -160,7 +186,7 @@ const Login = () => {
     };
 
     return (
-        <div>
+        <div className="md:m-28">
             <form onSubmit={handleSubmit(onSubmit)} className="form-card">
                 <img
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD4qERDnuFM9cBrqRQdDv-fVwKcHHIQQ3lDQ&usqp=CAU"

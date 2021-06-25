@@ -1,10 +1,10 @@
 import React from "react";
-import Bookings from "../Bookings/Bookings";
+import PublishBlog from "../PublishBlog/PublishBlog";
 
 const Dashboard = () => {
     return (
         <div>
-            <Bookings />
+            <PublishBlog />
         </div>
     );
 };

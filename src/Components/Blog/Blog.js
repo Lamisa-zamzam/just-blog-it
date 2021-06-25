@@ -5,10 +5,7 @@ const Blog = ({ blog }) => {
     console.log(blog);
     return (
         <div>
-            <div
-                className="md:mx-5 md:ml-20 grid md:grid-cols-2 justify-center items-center bg-white"
-                // key={blog._id}
-            >
+            <div className="md:mx-10 md:my-20 grid md:grid-cols-2 justify-center items-center bg-white">
                 <img
                     src={blog.imageURL}
                     alt="player"
@@ -18,7 +15,9 @@ const Blog = ({ blog }) => {
                     <h2 className="text-2xl mb-2 font-black text-red-700">
                         {blog.title}
                     </h2>
-                    <p className="mb-2 font-semibold">{blog.content}</p>
+                    <p className="mb-2 font-semibold w-48 h-48 overflow-ellipsis overflow-hidden">
+                        {blog.content}
+                    </p>
                     <br />
                     <Link
                         to="/"
