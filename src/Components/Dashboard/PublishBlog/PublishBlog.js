@@ -53,22 +53,18 @@ const PublishBlog = () => {
     };
 
     return (
-        <div className="relative min-h-screen md:flex">
+        <div className="windowWithSidebar">
             <SideNav />
             {isAdmin ? (
-                <div className="flex-1 p-10">
-                    <h1 className="text-center text-4xl font-semibold mt-10">
-                        Publish a blog
-                    </h1>
+                <div className="asideSideBar">
+                    <h1 className="dashBoardHeading">Publish a blog</h1>
                     <form
-                        className="max-w-xl m-auto py-10 mt-10 px-12 border"
+                        className="dashBoardForm"
                         onSubmit={handleSubmit(onSubmit)}
                     >
-                        <label className="text-gray-600 font-medium">
-                            Blog Title
-                        </label>
+                        <label className="dashFormLabel">Blog Title</label>
                         <input
-                            className="border-solid border-gray-300 border py-2 px-4 w-full rounded text-gray-700"
+                            className="dashFormInput"
                             type="text"
                             name="title"
                             placeholder="Your Blog Title"
@@ -76,12 +72,12 @@ const PublishBlog = () => {
                             {...register("title", { required: true })}
                         />
                         {errors.title && (
-                            <div className="mb-3 text-normal text-red-500">
+                            <div className="dashFormErr">
                                 This field is required
                             </div>
                         )}
 
-                        <label className="text-gray-600 font-medium block mt-4">
+                        <label className="dashFormLabel block mt-4">
                             Content
                         </label>
                         <textarea
@@ -93,7 +89,7 @@ const PublishBlog = () => {
                             {...register("content", { required: true })}
                         />
                         {errors.content && (
-                            <div className="mb-3 text-normal text-red-500 ">
+                            <div className="dashFormErr ">
                                 This field is required
                             </div>
                         )}
@@ -102,7 +98,7 @@ const PublishBlog = () => {
                             <label className="block text-sm font-medium text-gray-700">
                                 Cover photo
                             </label>
-                            <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                            <div className="mt-1 justified-flex px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                                 <div className="space-y-1 text-center">
                                     <svg
                                         className="mx-auto h-12 w-12 text-gray-400"
@@ -142,9 +138,9 @@ const PublishBlog = () => {
                         </div>
                         <br />
                         {imageURL ? (
-                            <div className="px-4 py-3 text-right sm:px-6">
+                            <div className="dashFormSubmitDiv">
                                 <button
-                                    className="mt-4 w-full bg-blue-500 hover:bg-blue-700 text-white border py-3 px-6 font-semibold text-md rounded"
+                                    className="DashFormSubmitBtn w-full"
                                     type="submit"
                                 >
                                     Publish
@@ -164,7 +160,7 @@ const PublishBlog = () => {
                     <br />
                 </div>
             ) : (
-                <h3 className="text-gray-500 md:ml-60 md:mt-28 md:text-3xl">
+                <h3 className="noAccessText">
                     Sorry, you don't have admin access.
                 </h3>
             )}

@@ -41,7 +41,7 @@ const BlogDetail = () => {
         <>
             <Navbar toggle={toggle} />
             <ResponsiveNav toggle={toggle} isOpen={isOpen} />
-            <div className="md:mx-10 my-20 justify-center items-center bg-white">
+            <div className="md:mx-10 my-20 centerIt bg-white">
                 <img
                     src={blog.imageURL}
                     alt="player"
@@ -54,9 +54,9 @@ const BlogDetail = () => {
                     <p className="mb-2 font-serif text-xl">{blog.content}</p>
                     <br />
                     <Link to="/">
-                        <button className="shadow-lg mt-5 py-3 px-7 bg-blue-300 rounded-full focus:bg-blue-500 transition duration-300 ease-in-out flex items-center w-max focus:outline-none">
+                        <button className="shadow-lg mt-5 py-3 px-7 bg-blue-300 rounded-full focus:bg-blue-500 transition duration-300 ease-in-out centeredFlex w-max focus:outline-none">
                             <svg
-                                className="w-6 h-6 mr-5"
+                                className="w6h6 mr-5"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -71,7 +71,7 @@ const BlogDetail = () => {
                             </svg>
                             Back to Home
                             <svg
-                                className="w-6 h-6 ml-4"
+                                className="w6h6 ml-4"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"

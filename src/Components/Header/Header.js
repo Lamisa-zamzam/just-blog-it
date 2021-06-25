@@ -9,11 +9,11 @@ const Header = () => {
             </h1>
             <Link
                 to="/"
-                className="py-6 px-10 bg-blue-300 rounded-full text-3xl hover:bg-blue-500 transition duration-300 ease-in-out flex items-center animate-bounce w-max ml-5"
+                className="py-6 px-10 bg-blue-300 rounded-full text-3xl hover:bg-blue-500 transition duration-300 ease-in-out centeredFlex animate-bounce w-max ml-5"
             >
                 Start Now
                 <svg
-                    className="w-6 h-6 ml-4"
+                    className="w6h6 ml-4"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

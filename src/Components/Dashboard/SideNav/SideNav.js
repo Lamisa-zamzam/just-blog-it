@@ -20,7 +20,7 @@ const SideNav = () => {
     return (
         <>
             {/* mobile menu */}
-            <div className="bg-blue-400 text-gray-100 font-bold flex justify-between md:hidden">
+            <div className="bg-blue-400 text-gray-100 font-bold justified-flex md:hidden">
                 <Link to="/" className="block p-4">
                     <img
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvrImfqN1gybiuS92IZ5iKRiPIYyj7cmJVrQ&usqp=CAU"
@@ -50,12 +50,13 @@ const SideNav = () => {
                     </svg>
                 </button>
             </div>
+
+            {/* Sidebar */}
             <div
                 className={`${
                     isOpen ? "-translate-x-full" : ""
                 } bg-blue-300 text-white absolute transform w-64 py-7 inset-y-0 left-0 md:relative md:translate-x-0 transition duration-200 ease-in-out`}
             >
-                {/* sidebar */}{" "}
                 <Link to="/" className="block p-4">
                     <img
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvrImfqN1gybiuS92IZ5iKRiPIYyj7cmJVrQ&usqp=CAU"
@@ -70,7 +71,7 @@ const SideNav = () => {
                     {" "}
                     <Link
                         to="/home"
-                        className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
+                        className="sideNav"
                     >
                         Home
                     </Link>
@@ -78,19 +79,19 @@ const SideNav = () => {
                         <>
                             {" "}
                             <Link
-                                className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
+                                className="sideNav"
                                 to="/publishBlog"
                             >
                                 Write a Blog
                             </Link>
                             <Link
-                                className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
+                                className="sideNav"
                                 to="/manageBlogs"
                             >
                                 Manage Blogs
                             </Link>
                             <Link
-                                className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
+                                className="sideNav"
                                 to="/makeAdmin"
                             >
                                 Make an admin

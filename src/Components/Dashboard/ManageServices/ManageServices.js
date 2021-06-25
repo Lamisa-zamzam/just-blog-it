@@ -34,24 +34,18 @@ const ManageBlogs = () => {
     };
 
     return (
-        <div className="relative min-h-screen md:flex">
+        <div className="windowWithSidebar">
             <SideNav />
             {isAdmin ? (
-                <div className="flex-1 p-10">
+                <div className="asideSideBar">
                     <div className="overflow-x-auto w-full">
                         <table className="mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
                             <thead className="bg-gray-900">
                                 <tr className="text-white text-left">
-                                    <th className="font-semibold text-sm uppercase px-6 py-4">
-                                        Cover
-                                    </th>
-                                    <th className="font-semibold text-sm uppercase px-6 py-4">
-                                        Title
-                                    </th>
-                                    <th className="font-semibold text-sm uppercase px-6 py-4">
-                                        Content
-                                    </th>
-                                    <th className="font-semibold text-sm uppercase px-6 py-4 text-center">
+                                    <th className="tableHeader">Cover</th>
+                                    <th className="tableHeader">Title</th>
+                                    <th className="tableHeader">Content</th>
+                                    <th className="tableHeader text-center">
                                         Action
                                     </th>
                                 </tr>
@@ -61,7 +55,7 @@ const ManageBlogs = () => {
                                     blogs.map((blog) => (
                                         <tr key={blog._id}>
                                             <td className="px-6 py-4">
-                                                <div className="flex items-center space-x-3">
+                                                <div className="centeredFlex space-x-3">
                                                     <div className="inline-flex w-10 h-10">
                                                         {" "}
                                                         <img
@@ -72,16 +66,16 @@ const ManageBlogs = () => {
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4 overflow-hidden overflow-ellipsis overflow-hidden">
-                                                <div className="inline-flex w-60 h-10">
-                                                    <p className="text-gray-500 text-sm font-semibold tracking-wide overflow-ellipsis overflow-hidden">
+                                            <td className="blogTableData">
+                                                <div className="blogTableDiv">
+                                                    <p className="blogTableP">
                                                         {blog.title}
                                                     </p>
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4 overflow-hidden overflow-ellipsis overflow-hidden">
-                                                <div className="inline-flex w-60 h-10">
-                                                    <p className="text-gray-500 text-sm font-semibold tracking-wide overflow-ellipsis overflow-hidden">
+                                            <td className="blogTableData">
+                                                <div className="blogTableDiv">
+                                                    <p className="blogTableP">
                                                         {blog.content}
                                                     </p>
                                                 </div>
@@ -123,7 +117,7 @@ const ManageBlogs = () => {
                     </div>
                 </div>
             ) : (
-                <h3 className="text-gray-500 md:ml-60 md:mt-28 md:text-3xl">
+                <h3 className="noAccessText">
                     Sorry, you don't have admin access.
                 </h3>
             )}

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Blog = ({ blog }) => {
     return (
         <Link to={`/blog/${blog._id}`}>
-            <div className="md:mx-10 md:my-20 mb-20 grid md:grid-cols-2 justify-center items-center bg-white">
+            <div className="md:mx-10 md:my-20 mb-20 grid md:grid-cols-2 centerIt bg-white">
                 <img
                     src={blog.imageURL}
                     alt="player"
@@ -14,14 +14,14 @@ const Blog = ({ blog }) => {
                     <h2 className="text-2xl mb-2 font-black text-red-700">
                         {blog.title}
                     </h2>
-                    <p className="mb-2 font-semibold w-48 h-48 overflow-ellipsis overflow-hidden">
+                    <p className="mb-2 font-semibold w-48 h-48 overflow-hidden">
                         {blog.content}
                     </p>
                     <br />
-                    <button className="shadow-lg mt-5 py-3 px-7 bg-blue-300 rounded-full focus:outline-none focus:bg-blue-500 transition duration-300 ease-in-out flex items-center w-max">
+                    <button className="shadow-lg mt-5 py-3 px-7 bg-blue-300 rounded-full focus:outline-none focus:bg-blue-500 transition duration-300 ease-in-out centeredFlex w-max">
                         Continue Reading
                         <svg
-                            className="w-6 h-6 ml-4"
+                            className="w6h6 ml-4"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"

@@ -32,22 +32,20 @@ const MakeAdmin = () => {
     };
 
     return (
-        <div className="relative min-h-screen md:flex">
+        <div className="windowWithSidebar">
             <SideNav />
             {isAdmin ? (
-                <div className="flex-1 p-10">
-                    <h1 className="text-center text-4xl font-semibold mt-10">
-                        Make an Admin
-                    </h1>
+                <div className="asideSideBar">
+                    <h1 className="dashBoardHeading">Make an Admin</h1>
                     <form
-                        className="max-w-xl m-auto py-10 mt-10 px-12 border"
+                        className="dashBoardForm"
                         onSubmit={handleSubmit(onSubmit)}
                     >
-                        <label className="text-gray-600 font-medium">
+                        <label className="dashFormLabel">
                             Email address of the admin you want to make
                         </label>
                         <input
-                            className="border-solid border-gray-300 border py-2 px-4 w-full rounded text-gray-700"
+                            className="dashFormInput"
                             type="email"
                             name="adminEmail"
                             placeholder="your.admin@example.com"
@@ -55,17 +53,15 @@ const MakeAdmin = () => {
                             {...register("adminEmail", { required: true })}
                         />
                         {errors.adminEmail && (
-                            <div className="mb-3 text-normal text-red-500">
+                            <div className="dashFormErr">
                                 This field is required
                             </div>
                         )}
                         <br />
                         <br />
-                        <label className="text-gray-600 font-medium">
-                            Password
-                        </label>
+                        <label className="dashFormLabel">Password</label>
                         <input
-                            className="border-solid border-gray-300 border py-2 px-4 w-full rounded text-gray-700"
+                            className="dashFormInput"
                             type="password"
                             name="adminPassword"
                             placeholder="super secured password"
@@ -73,13 +69,13 @@ const MakeAdmin = () => {
                             {...register("adminPassword", { required: true })}
                         />
                         {errors.adminPassword && (
-                            <div className="mb-3 text-normal text-red-500">
+                            <div className="dashFormErr">
                                 This field is required
                             </div>
                         )}
-                        <div className="px-4 py-3 text-right sm:px-6">
+                        <div className="dashFormSubmitDiv">
                             <button
-                                className="mt-4 w-36 bg-blue-500 hover:bg-blue-700 text-white border py-3 px-6 font-semibold text-md rounded"
+                                className="DashFormSubmitBtn w-36"
                                 type="submit"
                             >
                                 Add
@@ -88,7 +84,7 @@ const MakeAdmin = () => {
                     </form>
                 </div>
             ) : (
-                <h3 className="text-gray-500 md:ml-60 md:mt-28 md:text-3xl">
+                <h3 className="noAccessText">
                     Sorry, you don't have admin access.
                 </h3>
             )}

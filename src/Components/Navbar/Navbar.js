@@ -4,20 +4,20 @@ import { Link } from "react-router-dom";
 const Navbar = ({ toggle }) => {
     return (
         <nav
-            className="flex justify-between items-center h-16 bg-white text-xl font-black relative shadow-sm text-red-700"
+            className="justified-centeredFlex h-16 bg-white text-xl font-black relative shadow-sm text-red-700"
             role="navigation"
         >
             <Link to="/" className="pl-8">
                 <img
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvrImfqN1gybiuS92IZ5iKRiPIYyj7cmJVrQ&usqp=CAU"
                     alt=""
-                    className="w-10 inline mr-5 "
+                    className="w-10 inline mr-5"
                 />
                 Just Blog it
             </Link>
             <div className="px-4 cursor-pointer md:hidden">
                 <svg
-                    className="w-6 h-6"
+                    className="w6h6"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -35,7 +35,7 @@ const Navbar = ({ toggle }) => {
             <div className="pr-8 md:block hidden">
                 <Link className="p-4 " to="/home">
                     <svg
-                        className="w-6 h-6 inline"
+                        className="inline-icon"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -53,7 +53,7 @@ const Navbar = ({ toggle }) => {
                 </Link>
                 <Link className="p-4 " to="/publishBlog">
                     <svg
-                        className="w-6 h-6 inline"
+                        className="inline-icon"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -71,7 +71,7 @@ const Navbar = ({ toggle }) => {
                 </Link>
                 <Link className="p-4 " to="/dashboard">
                     <svg
-                        className="w-6 h-6 inline"
+                        className="inline-icon"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -89,7 +89,7 @@ const Navbar = ({ toggle }) => {
                 </Link>
                 <Link className="p-4" to="/manageBlogs">
                     <svg
-                        className="w-6 h-6 inline"
+                        className="inline-icon"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
