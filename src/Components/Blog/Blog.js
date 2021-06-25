@@ -2,9 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Blog = ({ blog }) => {
-    console.log(blog);
     return (
-        <div>
+        <Link to={`/blog/${blog._id}`}>
             <div className="md:mx-10 md:my-20 grid md:grid-cols-2 justify-center items-center bg-white">
                 <img
                     src={blog.imageURL}
@@ -19,10 +18,7 @@ const Blog = ({ blog }) => {
                         {blog.content}
                     </p>
                     <br />
-                    <Link
-                        to="/"
-                        className="shadow-lg mt-5 py-3 px-7 bg-blue-300 rounded-full hover:bg-blue-500 transition duration-300 ease-in-out flex items-center w-max"
-                    >
+                    <button className="shadow-lg mt-5 py-3 px-7 bg-blue-300 rounded-full hover:bg-blue-500 transition duration-300 ease-in-out flex items-center w-max">
                         Continue Reading
                         <svg
                             className="w-6 h-6 ml-4"
@@ -38,10 +34,10 @@ const Blog = ({ blog }) => {
                                 d="M17 8l4 4m0 0l-4 4m4-4H3"
                             />
                         </svg>
-                    </Link>
+                    </button>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 
