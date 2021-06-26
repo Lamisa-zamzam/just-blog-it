@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 const Header = () => {
@@ -12,6 +11,7 @@ const Header = () => {
                 className="py-6 px-10 text-3xl bg-blue-300 rounded-full hover:bg-blue-500 animatedButton animate-bounce ml-5"
             >
                 Start Now
+                {/* HeroIcon Arrow Right */}
                 <svg
                     className="w6h6 ml-4"
                     fill="none"

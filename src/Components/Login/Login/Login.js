@@ -1,15 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+// React
+import { useContext, useEffect, useState } from "react";
+// Context
 import { UserContext } from "../../../App";
+// React Router
 import { useHistory, useLocation } from "react-router";
 import { Link } from "react-router-dom";
+// React hook form
 import { useForm } from "react-hook-form";
-
+// Navbar
 import Navbar from "../../Navbar/Navbar";
-
 //firebase
 import firebase from "firebase/app";
 import "firebase/auth";
-
 // font awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -19,24 +21,57 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { firebaseConfig } from "./Firebase.config";
 
+// Initialize firebase app
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
 
 const Login = () => {
+    // Get the user form the context
     const [user, setUser] = useContext(UserContext);
-
+    // Get google auth provider
     const googleProvider = new firebase.auth.GoogleAuthProvider();
-
+    // Routing vars
     let history = useHistory();
     let location = useLocation();
     let { from } = location.state || { from: { pathname: "/dashboard" } };
 
+    // If the user is already logged in, it doesn't make sense to show him/her
+    // the login page again
     useEffect(() => {
         const token = sessionStorage.getItem("token");
         if (token) history.push(from);
     }, [from, history]);
 
+    // Passwords states
+    const [password, setPassword] = useState();
+    const [confirmPassword, setConfirmPassword] = useState();
+
+    // Toggling sign up and sign in
+    const toggleForm = (e) => {
+        e.preventDefault();
+        const newUser = { ...user };
+        newUser.isNewUser = !newUser.isNewUser;
+        newUser.error = "";
+        setUser(newUser);
+    };
+
+    // Setting passwords to state
+    const handleBlur = (e) => {
+        if (e.target.name === "password") {
+            setPassword(e.target.value);
+        }
+        if (e.target.name === "confirmPassword") {
+            setConfirmPassword(e.target.value);
+        }
+    };
+
+    // checks if the two passwords match
+    const checkPasswords = () => {
+        return password === confirmPassword;
+    };
+
+    // Check if the logged in user is an admin
     const checkAdmin = (email, password) => {
         fetch(`http://localhost:5000/checkAdmin`, {
             method: "POST",
@@ -46,28 +81,15 @@ const Login = () => {
             .then((res) => res.json())
             .then((data) => {
                 if (data[0]) {
+                    // If any admin with this email and password is found, the user is admin
                     sessionStorage.setItem("admin", true);
+                    const newUser = { ...user };
+                    newUser.admin = true;
+                    setUser(newUser);
                     return;
                 }
-
+                // else the user is not an admin
                 sessionStorage.setItem("admin", false);
-            });
-    };
-
-    // Google sign in
-    const handleGoogleLogin = () => {
-        firebase
-            .auth()
-            .signInWithPopup(googleProvider)
-            .then((result) => {
-                const googleUser = result.user;
-                const { displayName, email, photoURL } = googleUser;
-                handleUser(displayName, email, photoURL, true);
-
-                handleAuthToken();
-            })
-            .catch((error) => {
-                handleErrorMessage(error);
             });
     };
 
@@ -77,7 +99,9 @@ const Login = () => {
             .auth()
             .currentUser.getIdToken(true)
             .then(function (idToken) {
+                // Set the token to the session storage
                 sessionStorage.setItem("token", idToken);
+                // Redirect the user to the requested route
                 history.replace(from);
             })
             .catch(function (error) {});
@@ -103,6 +127,7 @@ const Login = () => {
         }
         setUser(newUser);
         checkAdmin(email, password);
+        handleAuthToken();
     };
 
     // handles error in case it occurs
@@ -111,6 +136,21 @@ const Login = () => {
         const newUser = { ...user };
         newUser.error = errorMessage;
         setUser(newUser);
+    };
+
+    // Google sign in
+    const handleGoogleLogin = () => {
+        firebase
+            .auth()
+            .signInWithPopup(googleProvider)
+            .then((result) => {
+                const googleUser = result.user;
+                const { displayName, email, photoURL } = googleUser;
+                handleUser(displayName, email, photoURL, true);
+            })
+            .catch((error) => {
+                handleErrorMessage(error);
+            });
     };
 
     // Register with email and password
@@ -123,7 +163,6 @@ const Login = () => {
                 .then((userCredential) => {
                     const { email } = userCredential.user;
                     handleUser(name, email, undefined, true);
-                    handleAuthToken();
                 })
                 .catch((error) => {
                     handleErrorMessage(error);
@@ -143,7 +182,6 @@ const Login = () => {
             .then((userCredential) => {
                 const { email } = userCredential.user;
                 handleUser(undefined, email, undefined, true);
-                handleAuthToken();
             })
             .catch((error) => {
                 handleErrorMessage(error);
@@ -163,38 +201,12 @@ const Login = () => {
             : handleLogIn(data.email, data.password);
     };
 
-    // Toggling sign up and sign in
-    const toggleForm = (e) => {
-        e.preventDefault();
-        const newUser = { ...user };
-        newUser.isNewUser = !newUser.isNewUser;
-        newUser.error = "";
-        setUser(newUser);
-    };
-
-    const [password, setPassword] = useState();
-    const [confirmPassword, setConfirmPassword] = useState();
-
-    // Checking passwords
-    const handleBlur = (e) => {
-        if (e.target.name === "password") {
-            setPassword(e.target.value);
-        }
-        if (e.target.name === "confirmPassword") {
-            setConfirmPassword(e.target.value);
-        }
-    };
-
-    // checks if the two passwords match
-    const checkPasswords = () => {
-        return password === confirmPassword;
-    };
-
     return (
         <>
             <Navbar />
             <div className="my-28 md:mx-28 text-center">
                 <form onSubmit={handleSubmit(onSubmit)}>
+                    {/* Logo */}
                     <img
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvrImfqN1gybiuS92IZ5iKRiPIYyj7cmJVrQ&usqp=CAU"
                         alt="Just Blog It"
@@ -348,6 +360,7 @@ const Login = () => {
                     <h4>or</h4>
                     <h2>continue with</h2>
                     <br />
+                    {/* Google login button*/}
                     <button
                         onClick={handleGoogleLogin}
                         className="focus:outline-none focus:bg-blue-100 p-3 text-2xl px-12 rounded-full border-2 border-blue-700 shadow-lg"
@@ -362,6 +375,7 @@ const Login = () => {
                     </button>
                     <br />
                     <br />
+                    {/* Facebook login button */}
                     <button className="focus:outline-none focus:bg-blue-100 p-3 text-2xl px-12 rounded-full border-2 border-blue-700 shadow-lg">
                         <FontAwesomeIcon
                             icon={faFacebookSquare}
@@ -372,6 +386,7 @@ const Login = () => {
                     </button>
                     <br />
                     <br />
+                    {/* Twitter login button */}
                     <button className="focus:outline-none focus:bg-blue-100 p-3 text-2xl px-12 rounded-full border-2 border-blue-700 shadow-lg">
                         <FontAwesomeIcon
                             icon={faTwitterSquare}

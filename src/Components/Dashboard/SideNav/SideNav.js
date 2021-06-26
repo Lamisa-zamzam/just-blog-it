@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
-const SideNav = () => {
-    const [isOpen, setIsOpen] = useState(true);
-    const [isAdmin, setIsAdmin] = useState(false);
+// Context
+import { UserContext } from "../../../App";
 
-    useEffect(() => {
-        const ifAdmin = JSON.parse(sessionStorage.getItem("admin"));
-        setIsAdmin(ifAdmin);
-    }, []);
+const SideNav = () => {
+    // Initial state of if the sidebar is open
+    const [isOpen, setIsOpen] = useState(true);
+
+    // Get the user form the context
+    const [user] = useContext(UserContext);
 
     return (
         <>
             {/* mobile menu */}
             <div className="bg-blue-400 text-gray-100 font-bold flex justify-between md:hidden">
                 <Link to="/" className="block p-4">
+                    {/* Logo */}
                     <img
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvrImfqN1gybiuS92IZ5iKRiPIYyj7cmJVrQ&usqp=CAU"
                         alt="Just Blog It"
@@ -43,12 +45,14 @@ const SideNav = () => {
                     </svg>
                 </button>
             </div>
+            {/* Laptop, tablet and desktop sidebar */}
             <div
                 className={`${
                     isOpen ? "-translate-x-full" : ""
                 } bg-blue-300 text-white absolute transform w-64 py-7 inset-y-0 left-0 md:relative md:translate-x-0 transition duration-200 ease-in-out`}
             >
                 <Link to="/" className="block p-4">
+                    {/* Logo */}
                     <img
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvrImfqN1gybiuS92IZ5iKRiPIYyj7cmJVrQ&usqp=CAU"
                         alt="Just Blog It"
@@ -65,7 +69,7 @@ const SideNav = () => {
                     >
                         Home
                     </Link>
-                    {isAdmin && (
+                    {user.admin && (
                         <>
                             {" "}
                             <Link

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import LaptopNav from "./LaptopNav/LaptopNav";
 import MobileNav from "./MobileNav/MobileNav";
 

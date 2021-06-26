@@ -6,7 +6,7 @@ This responsive MERN stack website is a platform for writers to publish their bl
 
 # Open [My Live Site](https://mighty-inlet-09591.herokuapp.com/) to see how it works.
 
-### You can also visit [My server](https://morning-shelf-52119.herokuapp.com/) form where I am loading data.
+### You can also visit [My server](https://frozen-coast-84516.herokuapp.com) form where I am loading data.
 
 ### My server side code link: [https://github.com/Lamisa-zamzam/just-blog-it-server](https://github.com/Lamisa-zamzam/just-blog-it-server)
 
@@ -18,7 +18,7 @@ My project includes:
 4.  [Font Awesome](https://fontawesome.com/),
 5.  [Firebase](https://firebase.google.com/docs?authuser=0),
 6.  [React Hook Form](https://react-hook-form.com/),
-7.  [My own APIs to load data](https://powerful-springs-02476.herokuapp.com) and
+7.  [My own APIs to load data](https://frozen-coast-84516.herokuapp.com) and
 8.  [HeroIcon](https://heroicons.dev/).
 
 ### RoadMap

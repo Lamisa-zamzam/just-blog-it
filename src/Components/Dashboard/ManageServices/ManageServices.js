@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SideNav from "../SideNav/SideNav";
 
+// Context
+import { UserContext } from "../../../App";
+
 const ManageBlogs = () => {
+    // Initial state of blogs
     const [blogs, setBlogs] = useState([]);
-    const [isAdmin, setIsAdmin] = useState(false);
 
-    useEffect(() => {
-        const ifAdmin = JSON.parse(sessionStorage.getItem("admin"));
-        setIsAdmin(ifAdmin);
-    }, []);
+    // Get the user form the context
+    const [user] = useContext(UserContext);
 
+    // Fetch all the blogs ever published
     useEffect(() => {
         fetch("http://localhost:5000/blogs")
             .then((res) => res.json())
@@ -18,7 +20,8 @@ const ManageBlogs = () => {
             });
     }, []);
 
-    const handleServiceDelete = (_id) => {
+    // Handle a blog delete
+    const handleBlogDelete = (_id) => {
         fetch(`http://localhost:5000/deleteBlog/${_id}`, {
             method: "DELETE",
         })
@@ -36,10 +39,12 @@ const ManageBlogs = () => {
     return (
         <div className="windowWithSidebar">
             <SideNav />
-            {isAdmin ? (
+            {user.admin ? (
                 <div className="asideSideBar">
                     <div className="overflow-x-auto w-full">
+                        {/* Dashboard */}
                         <table className="mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
+                            {/* Header */}
                             <thead className="bg-gray-900">
                                 <tr className="text-white text-left">
                                     <th className="tableHeader">Cover</th>
@@ -50,9 +55,11 @@ const ManageBlogs = () => {
                                     </th>
                                 </tr>
                             </thead>
+                            {/* Table Body */}
                             <tbody className="divide-y divide-gray-200">
                                 {blogs[0] ? (
                                     blogs.map((blog) => (
+                                        // Table Row
                                         <tr key={blog._id}>
                                             <td className="px-6 py-4">
                                                 <div className="centeredFlex space-x-3">
@@ -84,7 +91,7 @@ const ManageBlogs = () => {
                                                 <button
                                                     className="focus:outline-none"
                                                     onClick={() =>
-                                                        handleServiceDelete(
+                                                        handleBlogDelete(
                                                             blog._id
                                                         )
                                                     }

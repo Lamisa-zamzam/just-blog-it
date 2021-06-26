@@ -1,4 +1,5 @@
-import React, { useState, createContext } from "react";
+// React
+import { useState, createContext, useEffect } from "react";
 // Style
 import "./App.css";
 // Routing
@@ -28,7 +29,13 @@ function App() {
         isNewUser: true,
         isLoggedIn: false,
         error: "",
+        admin: false,
     });
+
+    useEffect(() => {
+        const ifAdmin = JSON.parse(sessionStorage.getItem("admin"));
+        setUser({ ...user, admin: ifAdmin });
+    }, []);
 
     return (
         <UserContext.Provider value={[user, setUser]}>

@@ -1,9 +1,9 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 const MobileNav = ({ isOpen, toggle }) => {
     return (
         <div
+            // Mobile nav is hidden in laptops, tablets and desktops
             className={
                 isOpen
                     ? "grid grid-rows-4 text-center items-center bg-blue-300"
@@ -12,6 +12,7 @@ const MobileNav = ({ isOpen, toggle }) => {
             onClick={toggle}
         >
             <Link className="p-4 " to="/home">
+                {/* HeroIcon - Home */}
                 <svg
                     className="inline-icon m-2"
                     fill="none"
@@ -29,6 +30,7 @@ const MobileNav = ({ isOpen, toggle }) => {
                 Home
             </Link>
             <Link className="p-4 " to="/publishBlog">
+                {/* HeroIcon - Pen */}
                 <svg
                     className="inline-icon m-2"
                     fill="none"
@@ -46,6 +48,7 @@ const MobileNav = ({ isOpen, toggle }) => {
                 Write a Blog
             </Link>
             <Link className="p-4 " to="/dashboard">
+                {/* HeroIcon - Report */}
                 <svg
                     className="inline-icon m-2"
                     fill="none"
@@ -63,6 +66,7 @@ const MobileNav = ({ isOpen, toggle }) => {
                 Dashboard
             </Link>
             <Link className="p-4" to="/manageBlogs">
+                {/* HeroIcon - Book opened */}
                 <svg
                     className="inline-icon m-2"
                     fill="none"

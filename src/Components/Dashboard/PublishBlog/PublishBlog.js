@@ -1,23 +1,26 @@
-import React, { useEffect, useState } from "react";
-import SideNav from "../SideNav/SideNav";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import SideNav from "../SideNav/SideNav";
+// Context
+import { UserContext } from "../../../App";
 
 const PublishBlog = () => {
-    const [isAdmin, setIsAdmin] = useState(false);
+    // Get the user form the context
+    const [user] = useContext(UserContext);
 
-    useEffect(() => {
-        const ifAdmin = JSON.parse(sessionStorage.getItem("admin"));
-        setIsAdmin(ifAdmin);
-    }, []);
-
+    // Initial state of the cover image URL
     const [imageURL, setImageURL] = useState(null);
+    // Initial error state
     const [error, setError] = useState(null);
+    // React Hook Form
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
+
+    // Handle form submit
     const onSubmit = (data) => {
         fetch("http://localhost:5000/addBlog", {
             method: "POST",
@@ -55,7 +58,7 @@ const PublishBlog = () => {
     return (
         <div className="windowWithSidebar">
             <SideNav />
-            {isAdmin ? (
+            {user.admin ? (
                 <div className="asideSideBar">
                     <h1 className="dashBoardHeading">Publish a blog</h1>
                     <form
@@ -94,6 +97,7 @@ const PublishBlog = () => {
                             </div>
                         )}
 
+                        {/* Cover Image Upload Area */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">
                                 Cover photo

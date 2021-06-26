@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 const LaptopNav = ({ toggle }) => {
@@ -16,6 +15,7 @@ const LaptopNav = ({ toggle }) => {
                 />
                 Just Blog it
             </Link>
+            {/* Menu Icon is hidden in Medium size screens */}
             <div className="px-4 cursor-pointer md:hidden">
                 {/* HeroIcon - menu */}
                 <svg
