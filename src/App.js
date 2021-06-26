@@ -1,5 +1,5 @@
 // React
-import { useState, createContext, useEffect } from "react";
+import { useState, createContext } from "react";
 // Style
 import "./App.css";
 // Routing
