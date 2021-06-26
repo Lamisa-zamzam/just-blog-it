@@ -14,6 +14,7 @@ import Dashboard from "./Components/Dashboard/Dashboard/Dashboard";
 import ManageBlogs from "./Components/Dashboard/ManageServices/ManageServices";
 import PublishBlog from "./Components/Dashboard/PublishBlog/PublishBlog";
 import MakeAdmin from "./Components/Dashboard/MakeAdmin/MakeAdmin";
+import NotFound from "./Components/NotFound/NotFound";
 
 // Context
 export const UserContext = createContext();
@@ -62,6 +63,11 @@ function App() {
                     <PrivateRoute path="/dashboard">
                         <Dashboard />
                     </PrivateRoute>
+
+                    {/* In case no rote is found */}
+                    <Route path="*">
+                        <NotFound />
+                    </Route>
                 </Switch>
             </Router>
         </UserContext.Provider>

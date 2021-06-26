@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-
 import Navbar from "../Navbar/Navbar";
-import ResponsiveNav from "../responsiveNav/ResponsiveNav";
 
 const BlogDetail = () => {
     // Get the blog id form the params
@@ -17,36 +15,10 @@ const BlogDetail = () => {
             .then((data) => setBlog(data[0]));
     }, [id]);
 
-    // Initial value of if the dropdown is open
-    const [isOpen, setIsOpen] = useState(false);
-
-    // toggle the dropdown
-    const toggle = () => {
-        setIsOpen(!isOpen);
-    };
-
-    // If the device width is greater than 760, set the isOpen to false
-    useEffect(() => {
-        const hideMenu = () => {
-            if (window.innerWidth > 760 && isOpen) {
-                setIsOpen(false);
-            }
-        };
-
-        // on resize, hide the menu
-        window.addEventListener("resize", hideMenu);
-
-        return () => {
-            window.removeEventListener("resize", hideMenu);
-        };
-    }, [isOpen]);
-
     return (
         <>
             {/* navbar */}
-            <Navbar toggle={toggle} />
-            {/* Responsive Navbar */}
-            <ResponsiveNav toggle={toggle} isOpen={isOpen} />
+            <Navbar />
 
             <div className="md:mx-10 my-20 centerIt bg-white">
                 <img

@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import Navbar from "../../Navbar/Navbar";
-import ResponsiveNav from "../../responsiveNav/ResponsiveNav";
 
 //firebase
 import firebase from "firebase/app";
@@ -191,33 +190,9 @@ const Login = () => {
         return password === confirmPassword;
     };
 
-    // Initial value of if the dropdown is open
-    const [isOpen, setIsOpen] = useState(false);
-    // toggle the dropdown
-    const toggle = () => {
-        setIsOpen(!isOpen);
-    };
-
-    // If the device width is greater than 760, set the state to false
-    useEffect(() => {
-        const hideMenu = () => {
-            if (window.innerWidth > 760 && isOpen) {
-                setIsOpen(false);
-            }
-        };
-
-        // on resize, hide the menu
-        window.addEventListener("resize", hideMenu);
-
-        return () => {
-            window.removeEventListener("resize", hideMenu);
-        };
-    }, [isOpen]);
-
     return (
         <>
-            <Navbar toggle={toggle} />
-            <ResponsiveNav toggle={toggle} isOpen={isOpen} />
+            <Navbar />
             <div className="my-28 md:mx-28 text-center">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <img

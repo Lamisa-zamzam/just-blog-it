@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ResponsiveNav = ({ isOpen, toggle }) => {
+const MobileNav = ({ isOpen, toggle }) => {
     return (
         <div
             className={
@@ -83,4 +83,4 @@ const ResponsiveNav = ({ isOpen, toggle }) => {
     );
 };
 
-export default ResponsiveNav;
+export default MobileNav;
