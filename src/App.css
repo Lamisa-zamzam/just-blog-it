@@ -1,9 +1,23 @@
+/* These are TailwindCSS classes */
+
 .error {
     @apply text-red-500;
 }
 
 .w6h6 {
     @apply w-6 h-6;
+}
+
+.animatedButton {
+    @apply transition duration-300 ease-in-out centeredFlex w-max;
+}
+
+.blogTitle {
+    @apply font-black text-red-700;
+}
+
+.blogButton {
+    @apply shadow-lg mt-5 py-3 px-7 bg-blue-300 rounded-full focus:outline-none focus:bg-blue-500 animatedButton;
 }
 
 .inline-icon {
@@ -15,7 +29,7 @@
 }
 
 .sideNav {
-    @apply block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300;
+    @apply block py-3 px-4 font-bold text-xl transition duration-200 hover:bg-blue-700 hover:text-blue-300;
 }
 
 .windowWithSidebar {
@@ -71,7 +85,7 @@
 }
 
 .dashFormErr {
-    @apply mb-3 text-normal text-red-500;
+    @apply mb-3 font-normal text-red-500;
 }
 
 .dashFormSubmitDiv {
@@ -79,5 +93,5 @@
 }
 
 .dashFormSubmitBtn {
-    @apply mt-4 bg-blue-500 hover:bg-blue-700 text-white border py-3 px-6 font-semibold text-md rounded;
+    @apply mt-4 bg-blue-500 hover:bg-blue-700 text-white border py-3 px-6 font-semibold text-sm rounded;
 }

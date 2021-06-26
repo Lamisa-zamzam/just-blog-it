@@ -3,24 +3,17 @@ import { Link } from "react-router-dom";
 
 const SideNav = () => {
     const [isOpen, setIsOpen] = useState(true);
-    const loggedInEmail = sessionStorage.getItem("email");
     const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/checkIfAdmin?email=${loggedInEmail}`)
-            .then((res) => res.json())
-            .then((data) => {
-                if (data[0]) {
-                    console.log(data, "data");
-                    setIsAdmin(true);
-                }
-            });
-    }, [loggedInEmail]);
+        const ifAdmin = JSON.parse(sessionStorage.getItem("admin"));
+        setIsAdmin(ifAdmin);
+    }, []);
 
     return (
         <>
             {/* mobile menu */}
-            <div className="bg-blue-400 text-gray-100 font-bold justified-flex md:hidden">
+            <div className="bg-blue-400 text-gray-100 font-bold flex justify-between md:hidden">
                 <Link to="/" className="block p-4">
                     <img
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvrImfqN1gybiuS92IZ5iKRiPIYyj7cmJVrQ&usqp=CAU"
@@ -33,7 +26,7 @@ const SideNav = () => {
                     className="p-4 focus:outline-none focus:bg-blue-700"
                     onClick={() => setIsOpen(!isOpen)}
                 >
-                    {" "}
+                    {/* heroIcon - menu */}
                     <svg
                         className="w-5 h-5"
                         fill="none"
@@ -50,8 +43,6 @@ const SideNav = () => {
                     </svg>
                 </button>
             </div>
-
-            {/* Sidebar */}
             <div
                 className={`${
                     isOpen ? "-translate-x-full" : ""
@@ -68,10 +59,9 @@ const SideNav = () => {
                     </span>
                 </Link>
                 <nav className="mt-5">
-                    {" "}
                     <Link
                         to="/home"
-                        className="sideNav"
+                        className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
                     >
                         Home
                     </Link>
@@ -79,19 +69,19 @@ const SideNav = () => {
                         <>
                             {" "}
                             <Link
-                                className="sideNav"
+                                className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
                                 to="/publishBlog"
                             >
                                 Write a Blog
                             </Link>
                             <Link
-                                className="sideNav"
+                                className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
                                 to="/manageBlogs"
                             >
                                 Manage Blogs
                             </Link>
                             <Link
-                                className="sideNav"
+                                className="block py-3 px-4 font-bold text-1xl transition duration-200 hover:bg-blue-700 hover:text-blue-300"
                                 to="/makeAdmin"
                             >
                                 Make an admin

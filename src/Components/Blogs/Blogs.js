@@ -1,10 +1,9 @@
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Blog from "../Blog/Blog";
 
 const Players = () => {
     const [blogs, setBlogs] = useState([]);
+    // Fetch All the blogs
     useEffect(() => {
         fetch("http://localhost:5000/blogs")
             .then((res) => res.json())

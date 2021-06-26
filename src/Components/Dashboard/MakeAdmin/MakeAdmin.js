@@ -75,7 +75,7 @@ const MakeAdmin = () => {
                         )}
                         <div className="dashFormSubmitDiv">
                             <button
-                                className="DashFormSubmitBtn w-36"
+                                className="dashFormSubmitBtn w-36"
                                 type="submit"
                             >
                                 Add

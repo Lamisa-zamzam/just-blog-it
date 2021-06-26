@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+
 import Navbar from "../Navbar/Navbar";
 import ResponsiveNav from "../responsiveNav/ResponsiveNav";
 
 const BlogDetail = () => {
+    // Get the blog id form the params
     const { id } = useParams();
-    const [blog, setBlog] = useState({});
-    console.log(id);
 
+    const [blog, setBlog] = useState({});
+
+    // Fetch the specific blog
     useEffect(() => {
         fetch(`http://localhost:5000/blog/${id}`)
             .then((res) => res.json())
@@ -16,12 +19,13 @@ const BlogDetail = () => {
 
     // Initial value of if the dropdown is open
     const [isOpen, setIsOpen] = useState(false);
+
     // toggle the dropdown
     const toggle = () => {
         setIsOpen(!isOpen);
     };
 
-    // If the device width is greater than 760, set the state to false
+    // If the device width is greater than 760, set the isOpen to false
     useEffect(() => {
         const hideMenu = () => {
             if (window.innerWidth > 760 && isOpen) {
@@ -39,8 +43,11 @@ const BlogDetail = () => {
 
     return (
         <>
+            {/* navbar */}
             <Navbar toggle={toggle} />
+            {/* Responsive Navbar */}
             <ResponsiveNav toggle={toggle} isOpen={isOpen} />
+
             <div className="md:mx-10 my-20 centerIt bg-white">
                 <img
                     src={blog.imageURL}
@@ -48,13 +55,12 @@ const BlogDetail = () => {
                     className="w-100 object-contain rounded m-auto shadow-lg"
                 />
                 <div className="px-5 mt-36">
-                    <h2 className="text-4xl mb-14 font-black text-red-700">
-                        {blog.title}
-                    </h2>
+                    <h2 className="text-4xl mb-14 blogTitle">{blog.title}</h2>
                     <p className="mb-2 font-serif text-xl">{blog.content}</p>
                     <br />
                     <Link to="/">
-                        <button className="shadow-lg mt-5 py-3 px-7 bg-blue-300 rounded-full focus:bg-blue-500 transition duration-300 ease-in-out centeredFlex w-max focus:outline-none">
+                        <button className="blogButton">
+                            {/* HeroIcon Home */}
                             <svg
                                 className="w6h6 mr-5"
                                 fill="none"
@@ -70,6 +76,7 @@ const BlogDetail = () => {
                                 />
                             </svg>
                             Back to Home
+                            {/* HeroIcon Arrow Right */}
                             <svg
                                 className="w6h6 ml-4"
                                 fill="none"

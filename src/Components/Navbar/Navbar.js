@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 const Navbar = ({ toggle }) => {
     return (
         <nav
-            className="justified-centeredFlex h-16 bg-white text-xl font-black relative shadow-sm text-red-700"
+            className="justified-flex items-center h-16 bg-white text-xl font-black relative shadow-sm text-red-700"
             role="navigation"
         >
             <Link to="/" className="pl-8">
+                {/* Logo */}
                 <img
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvrImfqN1gybiuS92IZ5iKRiPIYyj7cmJVrQ&usqp=CAU"
                     alt=""
@@ -16,6 +17,7 @@ const Navbar = ({ toggle }) => {
                 Just Blog it
             </Link>
             <div className="px-4 cursor-pointer md:hidden">
+                {/* HeroIcon - menu */}
                 <svg
                     className="w6h6"
                     fill="none"
@@ -34,6 +36,7 @@ const Navbar = ({ toggle }) => {
             </div>
             <div className="pr-8 md:block hidden">
                 <Link className="p-4 " to="/home">
+                    {/* HeroIcon - home */}
                     <svg
                         className="inline-icon"
                         fill="none"
@@ -52,6 +55,7 @@ const Navbar = ({ toggle }) => {
                     Home
                 </Link>
                 <Link className="p-4 " to="/publishBlog">
+                    {/* HeroIcon - pen */}
                     <svg
                         className="inline-icon"
                         fill="none"
@@ -70,6 +74,7 @@ const Navbar = ({ toggle }) => {
                     Write a Blog
                 </Link>
                 <Link className="p-4 " to="/dashboard">
+                    {/* HeroIcon - chart */}
                     <svg
                         className="inline-icon"
                         fill="none"
@@ -88,6 +93,7 @@ const Navbar = ({ toggle }) => {
                     Dashboard
                 </Link>
                 <Link className="p-4" to="/manageBlogs">
+                    {/* HeroIcon - book open */}
                     <svg
                         className="inline-icon"
                         fill="none"

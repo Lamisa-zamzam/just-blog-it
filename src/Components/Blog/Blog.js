@@ -7,19 +7,18 @@ const Blog = ({ blog }) => {
             <div className="md:mx-10 md:my-20 mb-20 grid md:grid-cols-2 centerIt bg-white">
                 <img
                     src={blog.imageURL}
-                    alt="player"
+                    alt="Blog Cover"
                     className="w-100 object-contain rounded mb-20 shadow-lg"
                 />
                 <div className="px-5">
-                    <h2 className="text-2xl mb-2 font-black text-red-700">
-                        {blog.title}
-                    </h2>
+                    <h2 className="text-2xl mb-2 blogTitle">{blog.title}</h2>
                     <p className="mb-2 font-semibold w-48 h-48 overflow-hidden">
                         {blog.content}
                     </p>
                     <br />
-                    <button className="shadow-lg mt-5 py-3 px-7 bg-blue-300 rounded-full focus:outline-none focus:bg-blue-500 transition duration-300 ease-in-out centeredFlex w-max">
+                    <button className="blogButton">
                         Continue Reading
+                        {/* HeroIcon Arrow Right */}
                         <svg
                             className="w6h6 ml-4"
                             fill="none"

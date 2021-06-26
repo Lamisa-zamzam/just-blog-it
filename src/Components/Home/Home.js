@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+
 import Navbar from "../Navbar/Navbar";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-import Blogs from "../Blogs/Blogs";
 import ResponsiveNav from "../responsiveNav/ResponsiveNav";
+import Header from "../Header/Header";
+import Blogs from "../Blogs/Blogs";
+import Footer from "../Footer/Footer";
 
 const Home = () => {
     // Initial value of if the dropdown is open
@@ -20,7 +21,6 @@ const Home = () => {
                 setIsOpen(false);
             }
         };
-        console.log(window.innerWidth)
 
         // on resize, hide the menu
         window.addEventListener("resize", hideMenu);
@@ -29,14 +29,17 @@ const Home = () => {
             window.removeEventListener("resize", hideMenu);
         };
     }, [isOpen]);
+
     return (
         <>
+            {/* Navbar */}
             <Navbar toggle={toggle} />
+            {/* Responsive Navbar */}
             <ResponsiveNav toggle={toggle} isOpen={isOpen} />
-            <div className="m-5">
+            <main className="m-5">
                 <Header />
                 <Blogs />
-            </div>
+            </main>
             <Footer />
         </>
     );
