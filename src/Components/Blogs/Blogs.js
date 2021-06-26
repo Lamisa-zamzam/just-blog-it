@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import Blog from "../Blog/Blog";
 
 const Players = () => {
+    // Initial blogs
     const [blogs, setBlogs] = useState([]);
+
     // Fetch All the blogs
     useEffect(() => {
         fetch("http://localhost:5000/blogs")
@@ -10,6 +12,7 @@ const Players = () => {
             .then((data) => (data.status = "200" && setBlogs(data)))
             .catch((err) => alert(err));
     }, []);
+
     return (
         <>
             <h1 className="lg:text-6xl md-text-7xl sm:text-5xl text-3xl font-black md:mx-20 mb-16 uppercase">

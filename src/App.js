@@ -32,11 +32,6 @@ function App() {
         admin: false,
     });
 
-    useEffect(() => {
-        const ifAdmin = JSON.parse(sessionStorage.getItem("admin"));
-        setUser({ ...user, admin: ifAdmin });
-    }, []);
-
     return (
         <UserContext.Provider value={[user, setUser]}>
             <Router>

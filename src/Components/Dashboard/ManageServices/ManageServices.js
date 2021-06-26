@@ -1,15 +1,17 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SideNav from "../SideNav/SideNav";
-
-// Context
-import { UserContext } from "../../../App";
 
 const ManageBlogs = () => {
     // Initial state of blogs
     const [blogs, setBlogs] = useState([]);
+    // Initial state of if the user is admin
 
-    // Get the user form the context
-    const [user] = useContext(UserContext);
+    const [isAdmin, setIsAdmin] = useState(false);
+    // Check if the user is admin
+    useEffect(() => {
+        const ifAdmin = JSON.parse(sessionStorage.getItem("admin"));
+        setIsAdmin(ifAdmin);
+    }, []);
 
     // Fetch all the blogs ever published
     useEffect(() => {
@@ -39,7 +41,7 @@ const ManageBlogs = () => {
     return (
         <div className="windowWithSidebar">
             <SideNav />
-            {user.admin ? (
+            {isAdmin ? (
                 <div className="asideSideBar">
                     <div className="overflow-x-auto w-full">
                         {/* Dashboard */}

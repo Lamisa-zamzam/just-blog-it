@@ -5,7 +5,7 @@ import Navbar from "../Navbar/Navbar";
 const BlogDetail = () => {
     // Get the blog id form the params
     const { id } = useParams();
-
+    // Initial blog
     const [blog, setBlog] = useState({});
 
     // Fetch the specific blog
@@ -48,7 +48,7 @@ const BlogDetail = () => {
                                 />
                             </svg>
                             Back to Home
-                            {/* HeroIcon Arrow Right */}
+                            {/* HeroIcon - Arrow Right */}
                             <svg
                                 className="w6h6 ml-4"
                                 fill="none"

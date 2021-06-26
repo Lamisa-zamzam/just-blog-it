@@ -1,13 +1,19 @@
-import { useContext, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+
 import axios from "axios";
+
 import SideNav from "../SideNav/SideNav";
-// Context
-import { UserContext } from "../../../App";
 
 const PublishBlog = () => {
-    // Get the user form the context
-    const [user] = useContext(UserContext);
+    // Initial state of if the user is admin
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    // Check if the user is admin
+    useEffect(() => {
+        const ifAdmin = JSON.parse(sessionStorage.getItem("admin"));
+        setIsAdmin(ifAdmin);
+    }, []);
 
     // Initial state of the cover image URL
     const [imageURL, setImageURL] = useState(null);
@@ -58,7 +64,7 @@ const PublishBlog = () => {
     return (
         <div className="windowWithSidebar">
             <SideNav />
-            {user.admin ? (
+            {isAdmin ? (
                 <div className="asideSideBar">
                     <h1 className="dashBoardHeading">Publish a blog</h1>
                     <form

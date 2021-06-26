@@ -17,7 +17,7 @@ const Blog = ({ blog }) => {
                     <br />
                     <button className="blogButton">
                         Continue Reading
-                        {/* HeroIcon Arrow Right */}
+                        {/* HeroIcon - Arrow Right */}
                         <svg
                             className="w6h6 ml-4"
                             fill="none"

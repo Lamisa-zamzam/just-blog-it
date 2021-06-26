@@ -1,15 +1,17 @@
-import { useContext, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-// Context
-import { UserContext } from "../../../App";
 
 const SideNav = () => {
     // Initial state of if the sidebar is open
     const [isOpen, setIsOpen] = useState(true);
+    // Initial state of if the user is admin
+    const [isAdmin, setIsAdmin] = useState(false);
 
-    // Get the user form the context
-    const [user] = useContext(UserContext);
+    // Check if the user is admin
+    useEffect(() => {
+        const ifAdmin = JSON.parse(sessionStorage.getItem("admin"));
+        setIsAdmin(ifAdmin);
+    }, []);
 
     return (
         <>
@@ -69,7 +71,7 @@ const SideNav = () => {
                     >
                         Home
                     </Link>
-                    {user.admin && (
+                    {isAdmin && (
                         <>
                             {" "}
                             <Link

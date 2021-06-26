@@ -1,22 +1,23 @@
-import { useContext } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import SideNav from "../SideNav/SideNav";
 
-// Context
-import { UserContext } from "../../../App";
-
 const MakeAdmin = () => {
-    // Get the user form the context
-    const [user] = useContext(UserContext);
+    // Initial state of if the user is admin
+    const [isAdmin, setIsAdmin] = useState(false);
 
-    // React Hook form
+    // Check if user is admin
+    useEffect(() => {
+        const ifAdmin = JSON.parse(sessionStorage.getItem("admin"));
+        setIsAdmin(ifAdmin);
+    }, []);
+
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
 
-    // Make an admin
     const onSubmit = (data) => {
         fetch("http://localhost:5000/makeAdmin", {
             method: "POST",
@@ -35,7 +36,7 @@ const MakeAdmin = () => {
     return (
         <div className="windowWithSidebar">
             <SideNav />
-            {user.admin ? (
+            {isAdmin ? (
                 <div className="asideSideBar">
                     <h1 className="dashBoardHeading">Make an Admin</h1>
                     <form
