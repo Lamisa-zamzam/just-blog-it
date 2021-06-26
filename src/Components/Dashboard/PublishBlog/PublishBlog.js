@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 
 import SideNav from "../SideNav/SideNav";
+import { useHistory } from "react-router-dom";
 
 const PublishBlog = () => {
     // Initial state of if the user is admin
@@ -26,6 +27,9 @@ const PublishBlog = () => {
         formState: { errors },
     } = useForm();
 
+    // Routing vars
+    let history = useHistory();
+
     // Handle form submit
     const onSubmit = (data) => {
         fetch("https://frozen-coast-84516.herokuapp.com/addBlog", {
@@ -39,7 +43,7 @@ const PublishBlog = () => {
                     alert(
                         "Your blog has been published successfully!! Give yourself a pat on the back!! 👊"
                     );
-                    window.location.reload();
+                    history.push("/dashboard");
                 }
             });
     };

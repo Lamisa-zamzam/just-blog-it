@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useHistory, useLocation } from "react-router-dom";
 import SideNav from "../SideNav/SideNav";
 
 const MakeAdmin = () => {
@@ -11,6 +12,9 @@ const MakeAdmin = () => {
         const ifAdmin = JSON.parse(sessionStorage.getItem("admin"));
         setIsAdmin(ifAdmin);
     }, []);
+
+    // Routing vars
+    let history = useHistory();
 
     const {
         register,
@@ -28,7 +32,7 @@ const MakeAdmin = () => {
             .then((result) => {
                 if (result) {
                     alert("Admin added successfully!!");
-                    window.location.reload();
+                    history.push("/dashboard");
                 }
             });
     };

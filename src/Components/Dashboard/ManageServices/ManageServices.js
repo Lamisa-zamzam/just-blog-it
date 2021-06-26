@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import SideNav from "../SideNav/SideNav";
 
 const ManageBlogs = () => {
     // Initial state of blogs
     const [blogs, setBlogs] = useState([]);
-    // Initial state of if the user is admin
 
+    // Initial state of if the user is admin
     const [isAdmin, setIsAdmin] = useState(false);
+
     // Check if the user is admin
     useEffect(() => {
         const ifAdmin = JSON.parse(sessionStorage.getItem("admin"));
         setIsAdmin(ifAdmin);
     }, []);
+
+    // Routing vars
+    let history = useHistory();
 
     // Fetch all the blogs ever published
     useEffect(() => {
@@ -31,7 +36,7 @@ const ManageBlogs = () => {
             .then((deleteCount) => {
                 if (deleteCount) {
                     alert("Your service has been deleted.");
-                    window.location.reload();
+                    history.push("/dashboard");
                 } else {
                     alert("Something unexpected happened. Please try again.");
                 }
