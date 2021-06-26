@@ -9,8 +9,8 @@ const Players = () => {
     useEffect(() => {
         fetch("https://frozen-coast-84516.herokuapp.com/blogs")
             .then((res) => res.json())
-            .then((data) => (data.status = "200" && setBlogs(data)))
-            .catch((err) => alert(err));
+            .then((data) => setBlogs(data))
+            .catch((err) => {});
     }, []);
 
     return (

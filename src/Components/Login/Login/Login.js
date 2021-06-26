@@ -86,10 +86,12 @@ const Login = () => {
                     const newUser = { ...user };
                     newUser.admin = true;
                     setUser(newUser);
+                    handleAuthToken();
                     return;
                 }
                 // else the user is not an admin
                 sessionStorage.setItem("admin", false);
+                handleAuthToken();
             });
     };
 
@@ -126,7 +128,6 @@ const Login = () => {
             newUser.isLoggedIn = true;
         }
         setUser(newUser);
-        checkAdmin(email, password);
     };
 
     // handles error in case it occurs
@@ -146,7 +147,7 @@ const Login = () => {
                 const googleUser = result.user;
                 const { displayName, email, photoURL } = googleUser;
                 handleUser(displayName, email, photoURL, true);
-                handleAuthToken();
+                checkAdmin(email, password);
             })
             .catch((error) => {
                 handleErrorMessage(error);
@@ -163,7 +164,7 @@ const Login = () => {
                 .then((userCredential) => {
                     const { email } = userCredential.user;
                     handleUser(name, email, undefined, true);
-                    handleAuthToken();
+                    checkAdmin(email, password);
                 })
                 .catch((error) => {
                     handleErrorMessage(error);
@@ -183,7 +184,7 @@ const Login = () => {
             .then((userCredential) => {
                 const { email } = userCredential.user;
                 handleUser(undefined, email, undefined, true);
-                handleAuthToken();
+                checkAdmin(email, password);
             })
             .catch((error) => {
                 handleErrorMessage(error);
