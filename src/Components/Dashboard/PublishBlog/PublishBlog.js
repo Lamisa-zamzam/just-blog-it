@@ -28,7 +28,7 @@ const PublishBlog = () => {
 
     // Handle form submit
     const onSubmit = (data) => {
-        fetch("http://localhost:5000/addBlog", {
+        fetch("https://frozen-coast-84516.herokuapp.com/addBlog", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify({ ...data, imageURL }),

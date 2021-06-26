@@ -7,7 +7,7 @@ const Players = () => {
 
     // Fetch All the blogs
     useEffect(() => {
-        fetch("http://localhost:5000/blogs")
+        fetch("https://frozen-coast-84516.herokuapp.com/blogs")
             .then((res) => res.json())
             .then((data) => (data.status = "200" && setBlogs(data)))
             .catch((err) => alert(err));

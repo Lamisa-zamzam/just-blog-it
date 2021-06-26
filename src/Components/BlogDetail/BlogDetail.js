@@ -10,7 +10,7 @@ const BlogDetail = () => {
 
     // Fetch the specific blog
     useEffect(() => {
-        fetch(`http://localhost:5000/blog/${id}`)
+        fetch(`https://frozen-coast-84516.herokuapp.com/blog/${id}`)
             .then((res) => res.json())
             .then((data) => setBlog(data[0]));
     }, [id]);

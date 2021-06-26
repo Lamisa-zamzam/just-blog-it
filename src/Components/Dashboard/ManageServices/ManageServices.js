@@ -15,7 +15,7 @@ const ManageBlogs = () => {
 
     // Fetch all the blogs ever published
     useEffect(() => {
-        fetch("http://localhost:5000/blogs")
+        fetch("https://frozen-coast-84516.herokuapp.com/blogs")
             .then((res) => res.json())
             .then((result) => {
                 setBlogs(result);
@@ -24,7 +24,7 @@ const ManageBlogs = () => {
 
     // Handle a blog delete
     const handleBlogDelete = (_id) => {
-        fetch(`http://localhost:5000/deleteBlog/${_id}`, {
+        fetch(`https://frozen-coast-84516.herokuapp.com/deleteBlog/${_id}`, {
             method: "DELETE",
         })
             .then((res) => res.json())

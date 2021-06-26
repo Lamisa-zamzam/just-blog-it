@@ -73,7 +73,7 @@ const Login = () => {
 
     // Check if the logged in user is an admin
     const checkAdmin = (email, password) => {
-        fetch(`http://localhost:5000/checkAdmin`, {
+        fetch(`https://frozen-coast-84516.herokuapp.com/checkAdmin`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password }),
@@ -127,7 +127,6 @@ const Login = () => {
         }
         setUser(newUser);
         checkAdmin(email, password);
-        handleAuthToken();
     };
 
     // handles error in case it occurs
@@ -147,6 +146,7 @@ const Login = () => {
                 const googleUser = result.user;
                 const { displayName, email, photoURL } = googleUser;
                 handleUser(displayName, email, photoURL, true);
+                handleAuthToken();
             })
             .catch((error) => {
                 handleErrorMessage(error);
@@ -163,6 +163,7 @@ const Login = () => {
                 .then((userCredential) => {
                     const { email } = userCredential.user;
                     handleUser(name, email, undefined, true);
+                    handleAuthToken();
                 })
                 .catch((error) => {
                     handleErrorMessage(error);
@@ -182,6 +183,7 @@ const Login = () => {
             .then((userCredential) => {
                 const { email } = userCredential.user;
                 handleUser(undefined, email, undefined, true);
+                handleAuthToken();
             })
             .catch((error) => {
                 handleErrorMessage(error);

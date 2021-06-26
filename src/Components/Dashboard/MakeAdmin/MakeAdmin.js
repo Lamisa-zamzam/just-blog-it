@@ -19,7 +19,7 @@ const MakeAdmin = () => {
     } = useForm();
 
     const onSubmit = (data) => {
-        fetch("http://localhost:5000/makeAdmin", {
+        fetch("https://frozen-coast-84516.herokuapp.com/makeAdmin", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(data),
